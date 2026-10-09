@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>It's a Bing Thing — AI Photo Transformation Prompt Studio</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#f9f4ff;background:#100b22}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 12% 0%,#40266c,transparent 42%),radial-gradient(ellipse at 92% 15%,#173d52,transparent 42%),#100b22;min-height:100vh}
+main{max-width:1180px;margin:auto;padding:24px 16px 55px}a{color:#a9f6e9}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.brand{font-weight:900;color:#e5c4ff;letter-spacing:.06em}.hero{padding:30px 0 20px}.hero h1{font-size:clamp(2rem,5vw,3.5rem);margin:8px 0;line-height:1.1}.hero h1 span{color:#6cf2dc}.hero p{color:#cfc5e2;max-width:800px;line-height:1.6}.pill{display:inline-block;border:1px solid #8167a8;background:#3b2859;padding:6px 12px;border-radius:99px;font-size:.85rem}
+.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.panel{border:1px solid #56426e;background:#211934dd;border-radius:20px;padding:22px;box-shadow:0 16px 45px #0003}.panel h2{margin:0 0 16px;font-size:1.3rem}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field{min-width:0}.field.wide{grid-column:1/-1}label{display:block;font-weight:700;font-size:.86rem;margin:0 0 6px;color:#e9def7}select,input,textarea{width:100%;background:#130e24;color:#fff;border:1px solid #715b89;border-radius:10px;padding:11px;font:inherit;min-height:44px}textarea{min-height:290px;line-height:1.5;resize:vertical}input[type=file]{padding:9px}small,.hint{color:#bfb3d1;line-height:1.45}.preview{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}.preview img{height:100px;max-width:160px;object-fit:contain;border:1px solid #685481;border-radius:10px;background:#120d22}.buttons{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 0}button{cursor:pointer;border:0;border-radius:12px;padding:12px 17px;font:inherit;font-weight:800;background:#78f4dc;color:#092720}button.secondary{background:#4b3765;color:#fff;border:1px solid #8266a1}button.pink{background:#ff8fc8;color:#301125}button:hover{filter:brightness(1.08)}.note{background:#31233e;border-left:3px solid #f6b2dc;padding:11px 13px;border-radius:8px;font-size:.88rem;color:#e8dcef;line-height:1.5}.counter{font-size:.8rem;color:#bcb0d2;text-align:right;margin-top:6px}footer{text-align:center;color:#a99bbb;margin-top:32px}@media(max-width:800px){.layout{grid-template-columns:1fr}}@media(max-width:470px){.fields{grid-template-columns:1fr}}
+</style></head><body><main>
+<div class="top"><div class="brand">💙 IT'S A BING THING • CREATIVE HUB</div><a href="index.html">← Back to all generators</a></div>
+<header class="hero"><span class="pill">✨ GENERATOR 9 • NEW</span><h1>📸 AI Photo <span>Transformation</span><br>Prompt Studio</h1><p>Choose a person or animal, then mix and match completely different outfits, worlds and artistic styles. Generate a <strong>short, structured AI image prompt</strong> that prioritises the reference subject's recognisable identity.</p></header>
+<div class="layout"><section class="panel"><h2>🎨 Build your transformation</h2>
+<div class="fields">
+<div class="field"><label for="subject">Subject</label><select id="subject"></select></div>
+<div class="field"><label for="theme">Theme / concept</label><select id="theme"></select></div>
+<div class="field"><label for="outfit">Outfit / styling</label><select id="outfit"></select></div>
+<div class="field"><label for="place">Setting / location</label><select id="place"></select></div>
+<div class="field"><label for="style">Visual style</label><select id="style"></select></div>
+<div class="field"><label for="light">Lighting / mood</label><select id="light"></select></div>
+<div class="field"><label for="pose">Pose / framing</label><select id="pose"></select></div>
+<div class="field"><label for="ratio">Aspect ratio</label><select id="ratio"></select></div>
+<div class="field"><label for="detail">Extra creative detail</label><select id="detail"></select></div>
+<div class="field"><label for="watermark">Watermark instruction</label><select id="watermark"></select></div>
+<div class="field wide"><label for="custom">Your own idea (optional)</label><input id="custom" placeholder="e.g. a fox as an astronaut on a moonlit rooftop"></div>
+
+
+<div class="field wide"><label for="markText">Watermark wording (optional)</label><input id="markText" placeholder="Your name or brand text"></div>
+</div><div class="buttons"><button id="generate">✨ Generate Prompt</button><button id="surprise" class="pink">🎲 Surprise Me</button><button id="reset" class="secondary">↺ Reset</button></div>
+</section>
+<section class="panel"><h2>📋 Your ready-to-use prompt</h2><textarea id="result" readonly placeholder="Choose your options and press Generate Prompt..."></textarea><div class="counter" id="count">0 words</div>
+<div class="buttons"><button id="copy">📋 Copy Prompt</button><button id="download" class="secondary">⬇ Download .txt</button></div>
+<p class="note"><strong>Important:</strong> This tool creates prompts, not finished images. The generated prompt tells your AI tool to use the <strong>reference photo</strong> and, when selected, the <strong>watermark image</strong> you attach alongside the prompt. AI cannot guarantee exact identity or logo reproduction; for pixel-perfect watermarks, add the original logo after creating the image.</p>
+</section></div><footer>IT'S A BING THING • WHERE CREATIVITY NEVER STOPS 💙</footer>
+<script>
+const options={
+subject:['Cat','Dog','Horse','Rabbit','Bird','Other pet or animal','Adult person','Child','Couple','Family','Group of friends','Wildlife animal'],
+theme:['Vintage British detective','Royal portrait','Enchanted fairytale','Christmas wonderland','Halloween gothic','Steampunk adventure','1920s glamour','Victorian elegance','Medieval fantasy','Pirate adventure','Space explorer','Underwater fantasy','Wild West','Spring garden party','Summer holiday','Autumn harvest','Winter cabin','Superhero adventure','Regency romance','Hollywood red carpet','Magical library','Circus performer','Chef in a bakery','Rock star','Artist in a studio','Time traveller','Ancient Egyptian royalty','Japanese cherry blossom','Viking saga','Cozy cottagecore','Cyberpunk neon city','Dark academia','Botanical greenhouse','Parisian café','Storybook woodland','Birthday celebration','Wizard school','Safari explorer','Fairy kingdom','Ocean sailor'],
+outfit:['Theme-appropriate tailored clothing','No clothing; natural appearance','Tweed suit and flat cap','Royal velvet and crown','Victorian dress or suit','1920s flapper or tuxedo','Cosy knitted jumper','Steampunk leather and brass','Elegant evening wear','Pirate coat and tricorn hat','Astronaut suit','Medieval cloak and tunic','Fairytale gown','Festive winter outfit','Gothic velvet outfit','Chef apron and hat','Wild West denim and boots','Raincoat and wellingtons','Botanical floral accessories','Academic robes','Fantasy armour','Beachwear','Artist smock','Classic trench coat','Historical military-inspired uniform'],
+place:['Old British village lane','Grand castle hall','Enchanted forest','Cosy vintage library','Snow-covered cottage','Autumn woodland path','Moonlit gothic mansion','Steampunk railway station','Parisian café terrace','Victorian London street','Royal palace garden','Starship observation deck','Alien planet','Tropical beach','Underwater palace','Medieval marketplace','Wildflower meadow','Japanese garden','Pumpkin patch','Christmas market','Sunlit greenhouse','Rustic farmhouse kitchen','Art deco hotel','Vintage train carriage','Seaside promenade','Mountain lodge','Neon futuristic city','Ancient temple','Fairy mushroom village','Elegant portrait studio'],
+style:['Ultra-photorealistic fine-art photography','Cinematic photorealism','Luxury editorial photography','Whimsical storybook illustration','Painterly oil portrait','Soft watercolour','Fantasy concept art','Detailed 3D animation','Vintage film photography','Art nouveau illustration','Dark gothic realism','Dreamy pastel illustration','Classic renaissance portrait','High-fashion editorial','Cosy illustrated picture book'],
+light:['Warm golden hour','Soft natural daylight','Moody candlelight','Moonlit blue glow','Dramatic cinematic spotlight','Soft overcast light','Magical glowing particles','Cosy fireplace light','Bright cheerful sunshine','Dreamy misty morning','Neon reflections','Elegant studio lighting','Twilight lantern glow','Snowy winter daylight'],
+pose:['Full body, eye level','Three-quarter portrait','Head and shoulders portrait','Seated, looking at camera','Walking naturally','Candid side profile','Close-up face portrait','Wide environmental portrait','Dynamic action pose','Symmetrical formal portrait'],
+ratio:['4:5 vertical','1:1 square','16:9 landscape','9:16 vertical','3:2 landscape','2:3 portrait'],
+detail:['No extra detail','Falling autumn leaves','Floating flower petals','Soft magical sparkles','Antique books and curios','Butterflies and wildflowers','Delicate snowflakes','Vintage lanterns','A tiny storybook prop','Gentle swirling mist','Intricate embroidery','Rain-speckled windows','Warm fairy lights','Dramatic storm clouds','Golden dust motes'],
+watermark:['No watermark','Use uploaded watermark image unchanged','Add custom text watermark','Use uploaded watermark and custom text']
+};
+for(const [id,items] of Object.entries(options)){const el=document.getElementById(id);for(const item of items){const o=document.createElement('option');o.value=item;o.textContent=item;el.appendChild(o)}}
+const $=id=>document.getElementById(id);
+function build(){
+const get=id=>$(id).value;
+const isAnimal=['Cat','Dog','Horse','Rabbit','Bird','Other pet or animal','Wildlife animal'].includes(get('subject'));
+const identity=isAnimal?'Preserve the exact recognizable animal identity, coat colour, markings, eye colour, face, proportions and natural species anatomy.':'Preserve the recognizable identity, facial features, age, skin tone and natural human anatomy of each reference person.';
+let lines=[
+'REFERENCE PHOTO: Use the subject photo attached alongside this prompt as the identity reference. '+identity,
+'SCENE: '+(get('custom').trim()?get('custom').trim()+'. ':'')+get('theme')+' in '+get('place').toLowerCase()+'. Outfit: '+get('outfit').toLowerCase()+'. '+(get('detail')==='No extra detail'?'':'Detail: '+get('detail').toLowerCase()+'.'),
+'STYLE: '+get('style')+'; '+get('light').toLowerCase()+'. Believable materials and anatomy, clear facial detail.',
+'COMPOSITION: '+get('pose')+'; '+get('ratio')+'.'
+];
+if(isAnimal)lines.push('ANATOMY: Keep authentic animal proportions; any costume must fit naturally without turning the animal into a human.');
+const mark=get('watermark'),name=get('markText').trim();
+if(mark!=='No watermark'){let m='WATERMARK: ';if(mark.includes('uploaded'))m+='Use the watermark image attached alongside this prompt, preserving its design, text and proportions; place it small in the bottom-left corner. ';if(mark.includes('text')||mark==='Add custom text watermark')m+=name?'Add the exact text "'+name+'" discreetly. ':'Add a discreet custom text watermark. ';lines.push(m.trim())}
+lines.push('AVOID: Altered identity, distorted anatomy, extra limbs, duplicated subjects, unwanted text or logos.');
+$('result').value=lines.join('\n\n');$('count').textContent=$('result').value.trim().split(/\s+/).length+' words';
+}
+$('generate').onclick=build;
+$('surprise').onclick=()=>{for(const id of Object.keys(options)){const el=$(id);el.selectedIndex=Math.floor(Math.random()*el.options.length)}build()};
+$('reset').onclick=()=>{for(const id of Object.keys(options))$(id).selectedIndex=0;$('custom').value='';$('markText').value='';$('result').value='';$('count').textContent='0 words'};
+$('copy').onclick=async()=>{if(!$('result').value)build();try{await navigator.clipboard.writeText($('result').value);$('copy').textContent='✓ Copied!';setTimeout(()=>$('copy').textContent='📋 Copy Prompt',1800)}catch(e){$('result').select();document.execCommand('copy')}};
+$('download').onclick=()=>{if(!$('result').value)build();const blob=new Blob([$('result').value],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='its-a-bing-thing-photo-transformation-prompt.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+
+build();
+</script></main></body></html>
