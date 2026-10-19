@@ -37,6 +37,7 @@ small,.hint{color:var(--muted)}textarea{font:14px/1.7 ui-monospace,SFMono-Regula
 <div><label for="paper">PAPER STYLE</label><select id="paper"><option value="warm ivory, subtly aged paper">Vintage ivory</option><option value="clean white archival paper">Clean white</option><option value="weathered sepia-toned paper">Aged sepia</option></select></div>
 <div><label for="ratio">ASPECT RATIO</label><select id="ratio"><option value="2:3 vertical">2:3 Portrait</option><option value="3:4 vertical">3:4 Portrait</option><option value="1:1 square">1:1 Square</option></select></div>
 </div>
+<div style="margin-top:20px"><label for="colourMode">PORTRAIT COLOUR</label><select id="colourMode"><option value="bw">Black &amp; White (classic typewriter)</option><option value="colour">Colour (coloured typewriter ink)</option></select></div>
 <div class="actions"><button id="generate">✦ Generate Prompt</button><button id="copy" class="secondary">Copy Prompt</button><button id="download" class="secondary">Download .txt</button></div>
 <div class="result">
 <div class="result-head"><label for="output" style="margin:0">YOUR GENERATOR-READY PROMPT</label><small id="status" aria-live="polite">Awaiting subject</small></div>
@@ -51,6 +52,11 @@ function generate(){
  const name=$('person').value.trim().replace(/\s+/g,' ');
  if(!name){$('person').focus();$('status').textContent='Enter a name first';return}
  const angle=$('view').value,paper=$('paper').value,ratio=$('ratio').value;
+ const isColour=$('colourMode').value==='colour';
+ const inkDescription=isColour
+  ? 'Authentic multi-colour mechanical typewriter inks on '+paper+'. Build all colours exclusively from individually typed, visibly legible characters, using carefully registered layers of coloured ribbon ink. Use warm and cool ink hues to render lifelike skin, eyes, hair, clothing, shadows and highlights; preserve character-by-character construction and realistic ink-pressure variation, ribbon wear and gentle paper grain. No painted colour fills, photographic colour or digital gradients.'
+  : 'Deep black mechanical typewriter ink on '+paper+'. Use only black ink and the natural paper tone, with no coloured ink. Include realistic ink-pressure variation, slightly imperfect character alignment, subtle ribbon wear and gentle paper grain.';
+ const finalPalette=isColour?'Richly coloured using typewriter ink characters only':'Strictly black and white, with no coloured ink';
  $('output').value=`Create an extraordinarily detailed, photorealistic TYPEWRITER ASCII ART PORTRAIT of ${name}, constructed ENTIRELY from individual letters, numbers, punctuation marks and symbols available on a traditional mechanical typewriter.
 
 SUBJECT & LIKENESS:
@@ -64,7 +70,7 @@ TONAL SHADING & DETAIL:
 Use tightly packed @, #, M, W and % characters for the darkest shadows; varied letters and numerals for midtones; sparse periods, commas, apostrophes and blank paper for delicate highlights. Vary character density, spacing, strike pressure and overtyping to create subtle transitions, intricate hair strands, lifelike eyes, natural skin texture and convincing three-dimensional facial structure. The portrait must read as realistic from a distance while clearly resolving into individual typewriter glyphs up close.
 
 AUTHENTIC MATERIAL:
-Deep black mechanical typewriter ink on ${paper}. Include realistic ink-pressure variation, slightly imperfect character alignment, subtle ribbon wear and gentle paper grain. The work should resemble a painstaking handmade masterpiece created on an antique typewriter.
+${inkDescription} The work should resemble a painstaking handmade masterpiece created on an antique typewriter.
 
 COMPOSITION:
 ${ratio} composition, centered head and upper shoulders, dramatic chiaroscuro lighting, rich blacks, delicate highlights, precise facial definition, elegant negative space and museum-quality fine-art presentation.
@@ -73,12 +79,12 @@ ABSOLUTE RESTRICTIONS:
 No brushstrokes. No drawn outlines. No pencil or charcoal. No smooth airbrushed gradients. No photographic overlays. No conventional digital painting. No typographic words or large text labels superimposed on the image. Do not merely overlay letters on a photograph. Every tonal region and every recognizable feature must be made from the actual density and placement of visible typewriter characters.
 
 FINAL RESULT:
-An astonishingly detailed, unmistakably recognizable portrait of ${name}, created exclusively from authentic typewritten letters and symbols. Monochrome, tactile, cinematic, masterfully composed, ultra-high-resolution fine art.`;
+An astonishingly detailed, unmistakably recognizable portrait of ${name}, created exclusively from authentic typewritten letters and symbols. ${finalPalette}, tactile, cinematic, masterfully composed, ultra-high-resolution fine art.`;
  $('status').textContent=`Ready · ${$('output').value.length.toLocaleString()} characters`;
 }
 $('generate').addEventListener('click',generate);
 $('person').addEventListener('keydown',e=>{if(e.key==='Enter')generate()});
-['view','paper','ratio'].forEach(id=>$(id).addEventListener('change',()=>{if($('person').value.trim())generate()}));
+['view','paper','ratio','colourMode'].forEach(id=>$(id).addEventListener('change',()=>{if($('person').value.trim())generate()}));
 $('copy').addEventListener('click',async()=>{
  if(!$('output').value.trim())generate();
  if(!$('output').value.trim())return;
