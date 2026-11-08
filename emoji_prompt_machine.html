@@ -282,25 +282,37 @@ const CONTENT_STYLE=/flower|floral|botanic|petal|herbarium|pressed flower|underw
 let kit=held[4]&&CONTENT_STYLE.test(style)?styleKit(style):null;
 // Held symbols are absolute locks. A style must never prevent a spin.
 // When a held style has specialist pools, it applies only to unlocked reels.
-let compatible=THEMES.map((t,i)=>i).filter(i=>held.slice(0,4).every((h,j)=>!h||t.a[j].includes(current[j])));
-if(!compatible.length)compatible=THEMES.map((_,i)=>i);
+let compatible=THEMES.map((t,i)=>i).filter(i=>allEmojiMode||held.slice(0,4).every((h,j)=>!h||THEMES[i].a[j].includes(current[j])));
+if(!compatible.length){
+ const scores=THEMES.map(t=>held.slice(0,4).reduce((score,h,j)=>score+(h&&t.a[j].includes(current[j])?1:0),0));
+ const best=Math.max(...scores);
+ compatible=scores.map((score,i)=>score===best?i:-1).filter(i=>i>=0);
+}
 let freshThemes=compatible.filter(i=>!lastThemes.includes(i));
 let eligible=freshThemes.length?freshThemes:compatible;
 const seasonal=new Set(['Christmas magic','Halloween night','Easter spring','Valentines romance','Birthday party','New Year fireworks','Festive celebrations','Christmas village','Halloween haunting','Easter meadow','Birthday surprise','New Year skyline']);
-if(!held.slice(0,4).some(Boolean)){
+if(!allEmojiMode&&!held.slice(0,4).some(Boolean)){
  const nonSeasonal=eligible.filter(i=>!seasonal.has(THEMES[i].n));
  if(nonSeasonal.length && rand(100)<82)eligible=nonSeasonal;
 }
 let idx=pick(eligible);
 lastThemes.push(idx);if(lastThemes.length>Math.min(17,THEMES.length-1))lastThemes.shift();themeIndex=idx;let theme=THEMES[idx];
 let used=new Set(current.filter((_,i)=>held[i]));
-for(let i=0;i<4;i++){if(held[i])continue;let pool=(kit&&kit.pools[i]?.length)?kit.pools[i]:theme.a[i];let candidates=pool.filter(e=>!used.has(e)&&e!==current[i]&&(i!==0||!recentSubjects.includes(e))&&!lastEmojis.includes(e));if(!candidates.length)candidates=pool.filter(e=>!used.has(e)&&e!==current[i]);if(!candidates.length)candidates=pool.filter(e=>!used.has(e));next[i]=pick(candidates.length?candidates:pool);used.add(next[i]);}
+for(let i=0;i<4;i++){if(held[i])continue;let pool=(kit&&kit.pools[i]?.length)?kit.pools[i]:(allEmojiMode?[...new Set(THEMES.flatMap(t=>t.a[i]))]:theme.a[i]);let candidates=pool.filter(e=>!used.has(e)&&e!==current[i]&&(i!==0||!recentSubjects.includes(e))&&!lastEmojis.includes(e));if(!candidates.length)candidates=pool.filter(e=>!used.has(e)&&e!==current[i]);if(!candidates.length)candidates=pool.filter(e=>!used.has(e));
+// Every unlocked reel must receive a NEW symbol, even when the theme's
+// pool is exhausted by held symbols or has only the current symbol.
+if(!candidates.length){
+ const alternatives=[...new Set(THEMES.flatMap(t=>t.a[i]))];
+ candidates=alternatives.filter(e=>!used.has(e)&&e!==current[i]);
+}
+if(!candidates.length)candidates=[...new Set(THEMES.flatMap(t=>t.a.flat()))].filter(e=>!used.has(e)&&e!==current[i]);
+next[i]=pick(candidates);used.add(next[i]);}
 // Avoid repeating the full combination, including after switching modes.
-let signature=next.join('|');for(let attempt=0;recentCombos.includes(signature)&&attempt<40;attempt++){let mutable=[0,1,2,3].filter(i=>!held[i]);if(!mutable.length)break;let j=pick(mutable),pool=(kit&&kit.pools[j]?.length)?kit.pools[j]:theme.a[j];let choices=pool.filter(e=>e!==next[j]&&!next.some((v,k)=>k!==j&&v===e));if(choices.length)next[j]=pick(choices);signature=next.join('|')}
+let signature=next.join('|');for(let attempt=0;recentCombos.includes(signature)&&attempt<40;attempt++){let mutable=[0,1,2,3].filter(i=>!held[i]);if(!mutable.length)break;let j=pick(mutable),pool=(kit&&kit.pools[j]?.length)?kit.pools[j]:(allEmojiMode?[...new Set(THEMES.flatMap(t=>t.a[j]))]:theme.a[j]);let choices=pool.filter(e=>e!==next[j]&&e!==old[j]&&!next.some((v,k)=>k!==j&&v===e));if(choices.length)next[j]=pick(choices);signature=next.join('|')}
 let newStyle=held[4]?style:fromBag('style');
 if(!held[4]){let attempts=0;while((newStyle===style||recentStyles.includes(newStyle))&&attempts++<Math.min(60,STYLES.length)){newStyle=fromBag('style')}}
 recordRecent(recentCombos,signature,120);recordRecent(recentSubjects,next[0],Math.min(15,CORE_THEMES.flatMap(t=>t.a[0]).length-1));recordRecent(recentStyles,newStyle,35);
-let animations=[];for(let i=0;i<4;i++)if(!held[i])animations.push(animateReel(tracks[i],windows[i],old[i],next[i],(kit&&kit.pools[i]?.length)?kit.pools[i]:theme.a[i],1000+i*260));if(!held[4])animations.push(animateReel(styleTrack,styleWindow,oldStyle,newStyle,STYLES,1850,true));
+let animations=[];for(let i=0;i<4;i++)if(!held[i])animations.push(animateReel(tracks[i],windows[i],old[i],next[i],(kit&&kit.pools[i]?.length)?kit.pools[i]:(allEmojiMode?[...new Set(THEMES.flatMap(t=>t.a[i]))]:theme.a[i]),1000+i*260));if(!held[4])animations.push(animateReel(styleTrack,styleWindow,oldStyle,newStyle,STYLES,1850,true));
 await Promise.all(animations);current=next;style=newStyle;lastEmojis=[...next];spinNumber++;renderPrompt();statusEl.textContent=`✨ Spin ${spinNumber} complete! ${held.filter(Boolean).length} reel(s) held. Enjoy your new creation!`;create.disabled=false;create.textContent='🎰 SPIN AGAIN';busy=false;document.querySelectorAll('[data-hold]').forEach(b=>b.disabled=false)}
 async function copy(text,msg){try{await navigator.clipboard.writeText(text)}catch(e){let ta=document.createElement('textarea');ta.value=text;document.body.append(ta);ta.select();document.execCommand('copy');ta.remove()}toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400)}
 document.getElementById('emojiMode').addEventListener('click',()=>{if(busy)return;allEmojiMode=!allEmojiMode;const b=document.getElementById('emojiMode');b.setAttribute('aria-pressed',String(allEmojiMode));b.textContent=allEmojiMode?'🌍 MODE: SURPRISE':'🎭 MODE: MATCHING THEMES';document.getElementById('emojiCount').textContent=allEmojiMode?'Fresh surprises with matching scenes':'Matching themes — coordinated subject, setting, atmosphere and detail';statusEl.textContent=allEmojiMode?'🌍 Surprise mode on — discover fresh combinations.':'🎭 Ready for another creative spin.';if(spinNumber&&!held.every(Boolean))spin();});
