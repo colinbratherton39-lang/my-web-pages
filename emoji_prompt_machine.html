@@ -94,141 +94,46 @@ h1{margin:9px 0;font-size:clamp(34px,6.5vw,76px);line-height:1.03;filter:drop-sh
 </main><div class="toast" id="toast">Copied</div>
 <script>
 const THEMES=[
-
-{n:'Halloween night',a:[['🎃','👻','🧙','🧛','🧟','💀','🦇','🐈‍⬛'],['🏚️','🪦','🕸️','🕷️','⚰️','🌲','🏰'],['🌕','🌙','🌫️','⚡','🕯️','🔮','🪄'],['🍬','🍭','🧹','🧪','🗝️','🎭','🧡']]},
-{n:'Christmas magic',a:[['🎅','🤶','🧑‍🎄','🦌','⛄','🐧','🐻‍❄️'],['🎄','❄️','🌨️','🏠','🛷','🌲','🏔️'],['✨','⭐','🌟','🔔','🕯️','🌙','🎶'],['🎁','🧦','🍪','🥛','🎀','🧣','☃️']]},
-{n:'Festive celebrations',a:[['🥳','🎅','🧑‍🎄','👑','🦄','🐻','🐱'],['🎉','🎊','🎈','🎄','🎆','🎇','🎂'],['✨','🌟','💖','🥂','🎶','💫','🌈'],['🎁','🎀','🪅','🕯️','🍰','🍾','🔔']]},
-{n:'Easter spring',a:[['🐰','🐇','🐣','🐥','🐤','🦋','🐝'],['🥚','🌷','🌸','🌼','🌿','🌱','🪺'],['☀️','🌈','✨','💖','🌤️','🌟','🫧'],['🧺','🍫','🎀','🎁','🏡','🪄','🧁']]},
-{n:'Valentines romance',a:[['💑','👩‍❤️‍👨','🐻','🦢','🦋','🐱','🦄'],['❤️','💐','🌹','🌷','💌','💝','💘'],['✨','💖','💕','💞','🌙','🌟','🥰'],['🎁','🍫','💍','🕯️','🥂','🎀','🍓']]},
-{n:'Birthday party',a:[['🥳','🐻','🐱','🦄','🐶','🐼','🤖'],['🎂','🧁','🎈','🎉','🎊','🎪','🎠'],['✨','🌈','🌟','💖','🎶','🎆','💫'],['🎁','🪅','🍭','🍬','🎀','📸','🎵']]},
-{n:'New Year fireworks',a:[['🥳','🕺','💃','🐉','🦄','🤖','👑'],['🎆','🎇','🎉','🎊','🌃','🏙️','🪩'],['✨','⭐','💫','🌟','🥂','🌈','⚡'],['🎁','🎈','🕛','🎶','🎵','🍾','🎀']]},
-
-{n:'Enchanted forest',a:[['🦊','🦉','🦄','🐻','🐰','🦋','🐺'],['🌲','🍄','🌳','🌿','🌸','🍀','🌻'],['🌙','✨','🌈','⭐','🔮','🪄','💫'],['🏰','🧚','🗝️','📜','💎','🧙','🕯️']]},
-{n:'Cosmic adventure',a:[['👽','🤖','👩‍🚀','🛸','👾','🦾'],['🚀','🪐','🌌','☄️','🌕','🌎'],['✨','💫','⭐','🌠','🔮','⚡'],['🏙️','🛰️','🔭','🧪','💎','🛸']]},
-{n:'Underwater wonder',a:[['🐬','🐙','🦈','🐢','🐠','🦀','🪼'],['🌊','🏝️','🪸','🐚','🫧','⛵'],['☀️','🌈','✨','💎','🌙','⭐'],['🏰','🧜‍♀️','🚢','⚓','🗝️','📸']]},
-{n:'Sweet treats',a:[['🐻','🐰','🦄','🐱','🐼','🦊'],['🧁','🍩','🍰','🍪','🍭','🍦','🍫'],['🌈','✨','🎉','💖','🎈','🌟'],['🎡','🎠','🎪','🎁','🏰','🎨']]},
-{n:'Wild safari',a:[['🦁','🐘','🦒','🦓','🐆','🦏','🐒'],['🌴','🌿','🌳','🏜️','⛰️','🌻'],['☀️','🌅','🌈','🌧️','✨','🌙'],['📸','🚙','🧭','🏕️','🗺️','🎒']]},
-{n:'Spooky spectacle',a:[['👻','🦇','🧛','🧟','💀','🎃','🐈‍⬛'],['🏰','🪦','🌲','🕸️','🕯️','🚪'],['🌙','⚡','🌫️','✨','🔮','🌩️'],['🗝️','📜','🪄','🧪','🎭','💎']]},
-{n:'City of the future',a:[['🤖','👽','🦾','🧑‍🚀','🐱','🦊'],['🏙️','🚄','🚀','🚁','🚗','🛸'],['🌃','⚡','✨','💡','🌈','🌌'],['🎮','🎧','📱','📸','🕹️','💎']]},
-{n:'Magical garden',a:[['🦋','🐝','🐞','🐰','🦔','🦊'],['🌷','🌹','🌻','🌸','🍄','🌿'],['🌈','☀️','✨','💧','🌙','⭐'],['🫖','🗝️','🏡','🎨','🧚','🪄']]},
-{n:'Winter fantasy',a:[['🐧','🐻‍❄️','🦊','🦌','🦉','🐺'],['❄️','⛄','🏔️','🌲','🧊','🌨️'],['🌌','🌙','✨','⭐','💫','🌈'],['🏰','🛷','🎁','🧣','🕯️','🪄']]},
-{n:'Pirate voyage',a:[['🏴‍☠️','🦜','🐙','🦈','🐒','🧜‍♀️'],['🏝️','🌊','⛵','🚢','🐚','🪸'],['☀️','🌩️','🌈','🌙','✨','⚡'],['🗺️','🧭','💎','🗝️','⚓','🏴‍☠️']]},
-{n:'Music festival',a:[['🦄','🤖','🐱','🦊','🐼','🦁'],['🎸','🎹','🎷','🥁','🎤','🎺'],['🎆','🌈','✨','🎉','💫','⚡'],['🎪','🎧','🎭','🎨','🎡','🎬']]},
-{n:'Royal fairy tale',a:[['👑','🦄','🐉','🦢','🦊','🧙'],['🏰','🌹','🌲','🌸','🏔️','🍄'],['✨','🌙','🌈','💫','🔮','⭐'],['🗝️','📜','💎','🪄','🕯️','🎭']]},
-{n:'Cozy countryside',a:[['🐑','🐄','🐴','🐓','🐰','🦆'],['🌻','🌾','🌳','🍎','🍓','🌷'],['☀️','🌈','🌤️','🍂','✨','🌙'],['🏡','🚜','🧺','🫖','🎨','📸']]},
-{n:'Dreamy dessert planet',a:[['🐱','🐼','🦄','🐰','🦊','🐻'],['🍓','🍒','🍉','🍍','🍑','🥝'],['🌈','💖','✨','🌟','🎉','💫'],['🍰','🍩','🍦','🧁','🍭','🎠']]},
-{n:'Ancient adventure',a:[['🐉','🦅','🦁','🐍','🦊','🦉'],['🏛️','🏜️','⛰️','🌋','🏰','🌲'],['☀️','🌙','✨','⚡','🌩️','🔮'],['🗝️','🗿','📜','💎','🧭','🪄']]},
-{n:'Robot workshop',a:[['🤖','🦾','👽','🐱','🐶','🧑‍🚀'],['⚙️','🔧','🛠️','🧪','💡','🔩'],['⚡','✨','💫','🌈','🔥','🔮'],['🚀','🎮','🕹️','🏙️','📸','🎨']]}
+{n:"Enchanted woodland",a:[["🦊", "🦌", "🐻", "🐺", "🦉", "🐿️", "🦋"], ["🌲", "🌳", "🌿", "🍄", "🌸", "🌼", "🌺"], ["🌙", "✨", "🌈", "🌫️", "☀️", "🌟"], ["🌷", "🍁", "🍂", "🌻", "🌹", "🪻"]]},
+{n:"Ancient forest",a:[["🦌", "🐻", "🦉", "🐺", "🦊", "🐿️"], ["🌲", "🌳", "🌿", "🍃", "🍄", "🌱"], ["🌫️", "🌙", "☀️", "✨", "🌧️"], ["🍂", "🍁", "🪵", "🪨", "🌾"]]},
+{n:"Cherry blossom dream",a:[["🦋", "🐦", "🦢", "🐇", "🦊"], ["🌸", "🌳", "🌷", "🌿", "🪷"], ["🌅", "🌈", "☀️", "✨", "🌙"], ["🌺", "🌼", "💮", "🍃", "🪻"]]},
+{n:"Tropical paradise",a:[["🦜", "🦩", "🐒", "🦋", "🐢", "🐬"], ["🌴", "🌺", "🌿", "🏝️", "🌊"], ["☀️", "🌈", "🌅", "✨", "🌤️"], ["🥥", "🍍", "🐚", "🌸", "🪸"]]},
+{n:"Wildflower meadow",a:[["🦋", "🐝", "🐞", "🐇", "🦊", "🦌"], ["🌻", "🌼", "🌷", "🌸", "🌿", "🌾"], ["☀️", "🌈", "🌤️", "✨", "🌅"], ["🌹", "🪻", "🌺", "🍀", "🍃"]]},
+{n:"Mountain wilderness",a:[["🦅", "🐻", "🐺", "🦌", "🦊", "🐐"], ["🏔️", "⛰️", "🌲", "🌳", "🪨"], ["🌅", "☀️", "🌙", "🌫️", "❄️"], ["🌿", "🍁", "🍂", "🌾", "🍃"]]},
+{n:"Waterfall sanctuary",a:[["🦋", "🦜", "🦌", "🐒", "🐸", "🦢"], ["🌊", "🌴", "🌿", "🌳", "🪷"], ["🌈", "☀️", "✨", "🌫️", "🌅"], ["🌸", "🌺", "🍃", "🪨", "🌼"]]},
+{n:"Ocean wonder",a:[["🐬", "🐢", "🐠", "🐙", "🦈", "🐳"], ["🌊", "🪸", "🐚", "🏝️", "🪼"], ["☀️", "🌈", "✨", "🌅", "🫧"], ["🐚", "🪸", "🪷", "🫧", "🌺"]]},
+{n:"Coral kingdom",a:[["🐠", "🐡", "🐙", "🐢", "🐬", "🦀"], ["🪸", "🌊", "🐚", "🪼"], ["🫧", "✨", "🌈", "☀️"], ["🐚", "🪸", "🪼", "🫧"]]},
+{n:"Winter wonderland",a:[["🦊", "🦌", "🐻‍❄️", "🐺", "🦉", "🐧"], ["🌲", "❄️", "🏔️", "⛄", "🌨️"], ["🌙", "✨", "🌟", "☀️", "🌌"], ["❄️", "🧊", "🌲", "🌨️"]]},
+{n:"Autumn magic",a:[["🦊", "🦌", "🐿️", "🦉", "🐻"], ["🍁", "🍂", "🌳", "🌲", "🍄"], ["🌅", "🌙", "✨", "🌫️", "☀️"], ["🍂", "🍁", "🌾", "🍄", "🌻"]]},
+{n:"Fairy kingdom",a:[["🧚", "🦄", "🦋", "🐉", "🦢"], ["🏰", "🌸", "🌳", "🌿", "🪷"], ["✨", "🌈", "🌙", "🌟", "💫"], ["🌹", "🌷", "🍄", "💎", "🪻"]]},
+{n:"Dragon realm",a:[["🐉", "🐲", "🦅", "🦄", "🐺"], ["🏰", "⛰️", "🌋", "🌲", "🪨"], ["🔥", "🌙", "⚡", "✨", "🌌"], ["💎", "🪨", "🌋", "🔥", "🌟"]]},
+{n:"Celestial fantasy",a:[["🦄", "🦋", "🦢", "🐉", "🧚"], ["🌙", "🌌", "🪐", "⭐", "☁️"], ["✨", "🌟", "💫", "🌈", "🌠"], ["🌸", "💎", "🪷", "🌠", "🦋"]]},
+{n:"Space exploration",a:[["👩‍🚀", "👨‍🚀", "👽", "🤖", "🛸"], ["🪐", "🌌", "🌕", "🌑", "🌍"], ["🌠", "✨", "🌟", "☄️", "💫"], ["🌙", "⭐", "🪐", "🌌", "☄️"]]},
+{n:"Prehistoric world",a:[["🦕", "🦖", "🦎", "🐊", "🦅"], ["🌋", "🌴", "🌲", "🌿", "⛰️"], ["☀️", "🌫️", "⚡", "🌧️"], ["🪨", "🍃", "🌋", "🌿", "🍂"]]},
+{n:"Safari sunset",a:[["🦁", "🐘", "🦒", "🦓", "🐆", "🦏"], ["🌳", "🌾", "🌴", "🏜️", "🌿"], ["🌅", "☀️", "🌤️", "🌈"], ["🌾", "🍃", "🌻", "🪨"]]},
+{n:"Rainforest adventure",a:[["🐒", "🦜", "🐍", "🐆", "🦋", "🐸"], ["🌴", "🌳", "🌿", "🌺", "🍃"], ["🌧️", "🌈", "☀️", "🌫️"], ["🌺", "🍄", "🌸", "🪷"]]},
+{n:"Desert oasis",a:[["🐪", "🦎", "🦂", "🦅", "🐍"], ["🏜️", "🌴", "🌵", "⛰️", "🪨"], ["🌅", "☀️", "🌙", "✨"], ["🌵", "🌴", "🪨", "🌾"]]},
+{n:"Romantic roses",a:[["🦢", "🦋", "🕊️", "🦄", "🐇"], ["🌹", "🌷", "🌸", "🌺", "🪷"], ["🌅", "🌙", "✨", "💖"], ["💐", "🌹", "🌸", "💗"]]},
+{n:"Haunted forest",a:[["🦇", "🦉", "🐈‍⬛", "👻", "🐺"], ["🌲", "🌳", "🕸️", "🍄", "🏚️"], ["🌕", "🌫️", "🌙", "⚡", "✨"], ["🕷️", "🍂", "🪦", "🦇"]]},
+{n:"Christmas woodland",a:[["🦌", "🦊", "🐻‍❄️", "⛄", "🎅"], ["🎄", "🌲", "❄️", "🏔️"], ["✨", "🌟", "🌙", "🌨️"], ["🎁", "❄️", "🔔", "🎀"]]},
+{n:"Easter garden",a:[["🐰", "🐇", "🐣", "🐥", "🦋"], ["🌷", "🌸", "🌼", "🌿", "🌳"], ["🌈", "☀️", "✨", "🌤️"], ["🥚", "🌷", "🌺", "🌼"]]},
+{n:"Harvest countryside",a:[["🐴", "🐑", "🐄", "🦊", "🐓"], ["🌾", "🌻", "🌳", "🍁", "🍂"], ["🌅", "☀️", "🌤️", "🌈"], ["🎃", "🍎", "🌽", "🍄"]]},
+{n:"Storybook village",a:[["🧚", "🦊", "🐇", "🦢", "🦄"], ["🏡", "🏰", "🌳", "🌸", "🌲"], ["🌈", "✨", "🌙", "🌅"], ["🌷", "🍄", "🌹", "🌼"]]},
+{n:"Lavender fields",a:[["🦋", "🐝", "🐇", "🦢", "🐦"], ["🪻", "🌿", "🌾", "🌳", "🌸"], ["🌅", "☀️", "🌈", "✨"], ["🪻", "🌷", "🌼", "🍃"]]},
+{n:"Volcanic island",a:[["🐉", "🦅", "🦎", "🦖", "🐢"], ["🌋", "🏝️", "🌴", "🪨", "⛰️"], ["🔥", "⚡", "🌅", "🌫️"], ["🪨", "🌿", "🌋", "🌊"]]},
+{n:"Northern lights",a:[["🦌", "🐺", "🦊", "🐻‍❄️", "🦉"], ["🌲", "🏔️", "❄️", "🌌"], ["🌌", "🌙", "✨", "🌟"], ["❄️", "🌲", "🧊", "⭐"]]},
+{n:"Golden sunflower fields",a:[["🦋", "🐝", "🐞", "🦊", "🐇"], ["🌻", "🌾", "🌳", "🌼"], ["☀️", "🌅", "🌈", "✨"], ["🌻", "🌼", "🍃", "🌾"]]},
+{n:"Japanese garden",a:[["🦢", "🐦", "🦋", "🐇", "🐟"], ["🌸", "🌳", "🎋", "🪷", "🌿"], ["🌙", "🌅", "☀️", "✨"], ["🌸", "🍃", "🪨", "🪷"]]},
+{n:"Gothic castle",a:[["🦇", "🐈‍⬛", "🦉", "🐉", "🐺"], ["🏰", "🌲", "🌫️", "🪦"], ["🌕", "🌙", "⚡", "✨"], ["🌹", "🕸️", "🪨", "🍂"]]},
+{n:"Ice palace",a:[["🦢", "🦄", "🐻‍❄️", "🦊", "🐧"], ["🏰", "❄️", "🧊", "🏔️"], ["✨", "🌙", "🌟", "🌌"], ["💎", "❄️", "🧊", "🌨️"]]},
+{n:"Springtime river",a:[["🦢", "🦆", "🐸", "🦋", "🐟"], ["🌊", "🌿", "🌳", "🌸", "🪷"], ["🌈", "☀️", "🌅", "✨"], ["🌷", "🌼", "🍃", "🪷"]]},
+{n:"Butterfly sanctuary",a:[["🦋", "🐝", "🐞", "🐦", "🧚"], ["🌸", "🌺", "🌷", "🌿", "🪷"], ["🌈", "✨", "☀️", "🌅"], ["🌹", "🪻", "🌼", "🍃"]]}
 ];
 
-// Story-led theme expansion; every concept reuses an existing emoji pool.
-for(const title of ["The midnight mushroom market", "The forest that remembers", "The fox and the forgotten key", "The fairy post office", "A secret treehouse kingdom", "The lantern-lit woodland parade", "The last glowing seed", "The woodland clockmaker", "The whispering moss library", "The enchanted autumn railway"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Enchanted forest").a})}
-for(const title of ["The intergalactic lost-and-found", "A picnic on Saturn’s rings", "The astronaut’s secret garden", "An alien antique shop", "A moonlight delivery service", "The galaxy inside a snow globe", "The comet-catching expedition", "A lighthouse at the edge of space", "The cosmic carnival", "A tiny planet with giant dreams"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Cosmic adventure").a})}
-for(const title of ["The jellyfish ballroom", "A coral city at sunrise", "The mermaid’s map room", "The sunken clock tower", "The octopus tea ceremony", "The ocean’s hidden bookshop", "A message in a pearl", "The deep-sea lantern festival", "The submarine flower garden", "A shipwreck turned palace"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Underwater wonder").a})}
-for(const title of ["The savannah after the rain", "The giraffe astronomer", "A desert oasis of mirrors", "The elephant’s travelling circus", "A wildlife photographer’s secret", "The golden-hour animal parade", "The lost jungle observatory", "A zebra in a world of colour"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Wild safari").a})}
-for(const title of ["The robot’s first birthday", "A clockwork butterfly garden", "The inventor’s midnight laboratory", "A robot-run bakery", "The mechanical pet adoption centre", "The tiny robot orchestra", "A forgotten factory awakens", "The robot who painted sunsets", "The steam-powered toy shop", "A robot’s underwater expedition"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Robot workshop").a})}
-for(const title of ["The dragon’s royal wedding", "A castle made of clouds", "The princess and the enchanted mirror", "The royal midnight masquerade", "The kingdom of glass roses", "The crown hidden in the forest", "The dragon’s secret library", "The floating palace", "The royal garden of wishes", "The knight and the moonflower"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Royal fairy tale").a})}
-for(const title of ["A rainy day at the village bakery", "The hedgehog’s cottage kitchen", "The harvest moon supper", "A miniature countryside bookshop", "The orchard in blossom", "The village flower festival", "The farmhouse at first snow", "The secret garden gate", "The travelling tea cart", "The sleepy riverside village"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Cozy countryside").a})}
-for(const title of ["The rooftop gardens of tomorrow", "A neon night market", "The floating city tram", "The cyberpunk flower seller", "The city beneath the clouds", "The future’s smallest apartment", "The robot street musician", "A midnight monorail journey", "The last analogue camera shop", "A vertical city of waterfalls"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="City of the future").a})}
-for(const title of ["The garden of giant teacups", "The butterfly’s secret doorway", "A greenhouse of impossible plants", "The moonflower conservatory", "The gardener of tiny dragons", "A botanical treasure hunt", "The garden inside a lantern", "The rainbow seed shop", "The midnight greenhouse", "A garden growing on a whale"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Magical garden").a})}
-for(const title of ["The northern lights bakery", "The snow fox’s lantern", "The ice palace library", "The winter solstice procession", "The polar bear’s cosy cabin", "A snow globe metropolis", "The frozen waterfall kingdom", "The midnight sleigh adventure"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Winter fantasy").a})}
-for(const title of ["The pirate’s floating bookshop", "A treasure map of the stars", "The lighthouse of lost ships", "The captain’s enchanted compass", "The pirate ship in the sky", "The island of singing shells", "The ghost ship’s tea party", "A hidden harbour at sunset"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Pirate voyage").a})}
-for(const title of ["The moonlit jazz club", "An orchestra of woodland animals", "The neon rooftop concert", "The travelling circus band", "A symphony under the sea", "The robot disco", "The enchanted music box", "The festival of floating lanterns"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Music festival").a})}
-for(const title of ["The candy kingdom at dawn", "A patisserie in the clouds", "The giant strawberry fair", "The enchanted chocolate factory", "A bakery run by dragons", "The marshmallow mountain", "The dessert train", "The tiny cupcake village"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Sweet treats").a})}
-for(const title of ["The forgotten desert temple", "A museum of impossible relics", "The explorer’s secret journal", "A portal in the ancient ruins", "The oracle’s hidden garden", "The lost city of golden clocks", "The celestial archaeological dig", "The treasure beneath the mountain"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Ancient adventure").a})}
-for(const title of ["The haunted sweet shop", "A ghost’s cosy cottage", "The pumpkin village festival", "The witch’s midnight café", "A friendly monster’s portrait", "The haunted toy theatre", "The cemetery flower market", "The vampire’s vintage hotel"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Halloween night").a})}
-for(const title of ["The reindeer’s secret workshop", "The snowman’s first adventure", "The Christmas village bakery", "The toy maker’s lantern", "A winter gift delivery", "The enchanted advent calendar", "The North Pole post office", "The midnight ornament shop"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Christmas magic").a})}
-for(const title of ["The rabbit’s flower shop", "The hidden egg garden", "A springtime woodland picnic", "The painted egg palace", "The chick’s first journey", "The blossom-covered village"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Easter spring").a})}
-for(const title of ["The love-letter lighthouse", "A romantic Parisian bookshop", "The rose garden at twilight", "A celestial love story", "The swans’ moonlit lake", "The heart-shaped island"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Valentines romance").a})}
-for(const title of ["The birthday party on the moon", "A surprise party for a dragon", "The confetti-filled castle", "A tiny animal birthday picnic", "The birthday cake carnival", "The magical gift shop"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Birthday party").a})}
-for(const title of ["A midnight rooftop celebration", "The clockmaker’s New Year", "The floating lantern countdown", "A galaxy of fireworks", "The winter masquerade ball", "The first sunrise of the year"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="New Year fireworks").a})}
-for(const title of ["The fruit-shaped floating islands", "The strawberry moon colony", "The pineapple palace", "A watermelon sea voyage", "The citrus-coloured dream city", "The peach orchard in the clouds"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Dreamy dessert planet").a})}
-for(const title of ["The lantern-lit street carnival", "The masked midnight ball", "The parade of giant flowers", "A festival above the clouds", "The confetti clock tower", "The world’s tiniest celebration"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Festive celebrations").a})}
-for(const title of ["The abandoned carnival awakens", "The haunted mirror maze", "The friendly skeleton orchestra", "The foggy midnight station", "A phantom’s masquerade", "The ghostly candlelit library"]){THEMES.push({n:title,a:THEMES.find(t=>t.n==="Spooky spectacle").a})}
 const ALL_EMOJIS=["🀄","🃏","🆎","🆑","🆒","🆓","🆔","🆕","🆖","🆗","🆘","🆙","🆚","🈁","🈚","🈯","🈲","🈳","🈴","🈵","🈶","🈸","🈹","🈺","🉐","🉑","🌀","🌁","🌂","🌃","🌄","🌅","🌆","🌇","🌈","🌉","🌊","🌋","🌌","🌍","🌎","🌏","🌐","🌑","🌒","🌓","🌔","🌕","🌖","🌗","🌘","🌙","🌚","🌛","🌜","🌝","🌞","🌟","🌠","🌭","🌮","🌯","🌰","🌱","🌲","🌳","🌴","🌵","🌷","🌸","🌹","🌺","🌻","🌼","🌽","🌾","🌿","🍀","🍁","🍂","🍃","🍄","🍅","🍆","🍇","🍈","🍉","🍊","🍋","🍌","🍍","🍎","🍏","🍐","🍑","🍒","🍓","🍔","🍕","🍖","🍗","🍘","🍙","🍚","🍛","🍜","🍝","🍞","🍟","🍠","🍡","🍢","🍣","🍤","🍥","🍦","🍧","🍨","🍩","🍪","🍫","🍬","🍭","🍮","🍯","🍰","🍱","🍲","🍳","🍴","🍵","🍶","🍷","🍸","🍹","🍺","🍻","🍼","🍾","🍿","🎀","🎁","🎂","🎃","🎄","🎅","🎆","🎇","🎈","🎉","🎊","🎋","🎌","🎍","🎎","🎏","🎐","🎑","🎒","🎓","🎠","🎡","🎢","🎣","🎤","🎥","🎦","🎧","🎨","🎩","🎪","🎫","🎬","🎭","🎮","🎯","🎰","🎱","🎲","🎳","🎴","🎵","🎶","🎷","🎸","🎹","🎺","🎻","🎼","🎽","🎾","🎿","🏀","🏁","🏂","🏃","🏄","🏅","🏆","🏇","🏈","🏉","🏊","🏏","🏐","🏑","🏒","🏓","🏠","🏡","🏢","🏣","🏤","🏥","🏦","🏧","🏨","🏩","🏪","🏫","🏬","🏭","🏮","🏯","🏰","🏴","🏸","🏹","🏺","🐀","🐁","🐂","🐃","🐄","🐅","🐆","🐇","🐈","🐉","🐊","🐋","🐌","🐍","🐎","🐏","🐐","🐑","🐒","🐓","🐔","🐕","🐖","🐗","🐘","🐙","🐚","🐛","🐜","🐝","🐞","🐟","🐠","🐡","🐢","🐣","🐤","🐥","🐦","🐧","🐨","🐩","🐪","🐫","🐬","🐭","🐮","🐯","🐰","🐱","🐲","🐳","🐴","🐵","🐶","🐷","🐸","🐹","🐺","🐻","🐼","🐽","🐾","👀","👂","👃","👄","👅","👆","👇","👈","👉","👊","👋","👌","👍","👎","👏","👐","👑","👒","👓","👔","👕","👖","👗","👘","👙","👚","👛","👜","👝","👞","👟","👠","👡","👢","👣","👤","👥","👦","👧","👨","👩","👪","👫","👬","👭","👮","👯","👰","👱","👲","👳","👴","👵","👶","👷","👸","👹","👺","👻","👼","👽","👾","👿","💀","💁","💂","💃","💄","💅","💆","💇","💈","💉","💊","💋","💌","💍","💎","💏","💐","💑","💒","💓","💔","💕","💖","💗","💘","💙","💚","💛","💜","💝","💞","💟","💠","💡","💢","💣","💤","💥","💦","💧","💨","💩","💪","💫","💬","💭","💮","💯","💰","💱","💲","💳","💴","💵","💶","💷","💸","💹","💺","💻","💼","💽","💾","💿","📀","📁","📂","📃","📄","📅","📆","📇","📈","📉","📊","📋","📌","📍","📎","📏","📐","📑","📒","📓","📔","📕","📖","📗","📘","📙","📚","📛","📜","📝","📞","📟","📠","📡","📢","📣","📤","📥","📦","📧","📨","📩","📪","📫","📬","📭","📮","📯","📰","📱","📲","📳","📴","📵","📶","📷","📸","📹","📺","📻","📼","📿","🔀","🔁","🔂","🔃","🔄","🔅","🔆","🔇","🔈","🔉","🔊","🔋","🔌","🔍","🔎","🔏","🔐","🔑","🔒","🔓","🔔","🔕","🔖","🔗","🔘","🔙","🔚","🔛","🔜","🔝","🔞","🔟","🔠","🔡","🔢","🔣","🔤","🔥","🔦","🔧","🔨","🔩","🔪","🔫","🔬","🔭","🔮","🔯","🔰","🔱","🔲","🔳","🔴","🔵","🔶","🔷","🔸","🔹","🔺","🔻","🔼","🔽","🕋","🕌","🕍","🕎","🕐","🕑","🕒","🕓","🕔","🕕","🕖","🕗","🕘","🕙","🕚","🕛","🕜","🕝","🕞","🕟","🕠","🕡","🕢","🕣","🕤","🕥","🕦","🕧","🕺","🖕","🖖","🖤","🗻","🗼","🗽","🗾","🗿","😀","😁","😂","😃","😄","😅","😆","😇","😈","😉","😊","😋","😌","😍","😎","😏","😐","😑","😒","😓","😔","😕","😖","😗","😘","😙","😚","😛","😜","😝","😞","😟","😠","😡","😢","😣","😤","😥","😦","😧","😨","😩","😪","😫","😬","😭","😮","😯","😰","😱","😲","😳","😴","😵","😶","😷","😸","😹","😺","😻","😼","😽","😾","😿","🙀","🙁","🙂","🙃","🙄","🙅","🙆","🙇","🙈","🙉","🙊","🙋","🙌","🙍","🙎","🙏","🚀","🚁","🚂","🚃","🚄","🚅","🚆","🚇","🚈","🚉","🚊","🚋","🚌","🚍","🚎","🚏","🚐","🚑","🚒","🚓","🚔","🚕","🚖","🚗","🚘","🚙","🚚","🚛","🚜","🚝","🚞","🚟","🚠","🚡","🚢","🚣","🚤","🚥","🚦","🚧","🚨","🚩","🚪","🚫","🚬","🚭","🚮","🚯","🚰","🚱","🚲","🚳","🚴","🚵","🚶","🚷","🚸","🚹","🚺","🚻","🚼","🚽","🚾","🚿","🛀","🛁","🛂","🛃","🛄","🛅","🛌","🛐","🛑","🛒","🛕","🛖","🛗","🛘","🛜","🛝","🛞","🛟","🛫","🛬","🛴","🛵","🛶","🛷","🛸","🛹","🛺","🛻","🛼","🟠","🟡","🟢","🟣","🟤","🟥","🟦","🟧","🟨","🟩","🟪","🟫","🟰","🤌","🤍","🤎","🤏","🤐","🤑","🤒","🤓","🤔","🤕","🤖","🤗","🤘","🤙","🤚","🤛","🤜","🤝","🤞","🤟","🤠","🤡","🤢","🤣","🤤","🤥","🤦","🤧","🤨","🤩","🤪","🤫","🤬","🤭","🤮","🤯","🤰","🤱","🤲","🤳","🤴","🤵","🤶","🤷","🤸","🤹","🤺","🤼","🤽","🤾","🤿","🥀","🥁","🥂","🥃","🥄","🥅","🥇","🥈","🥉","🥊","🥋","🥌","🥍","🥎","🥏","🥐","🥑","🥒","🥓","🥔","🥕","🥖","🥗","🥘","🥙","🥚","🥛","🥜","🥝","🥞","🥟","🥠","🥡","🥢","🥣","🥤","🥥","🥦","🥧","🥨","🥩","🥪","🥫","🥬","🥭","🥮","🥯","🥰","🥱","🥲","🥳","🥴","🥵","🥶","🥷","🥸","🥹","🥺","🥻","🥼","🥽","🥾","🥿","🦀","🦁","🦂","🦃","🦄","🦅","🦆","🦇","🦈","🦉","🦊","🦋","🦌","🦍","🦎","🦏","🦐","🦑","🦒","🦓","🦔","🦕","🦖","🦗","🦘","🦙","🦚","🦛","🦜","🦝","🦞","🦟","🦠","🦡","🦢","🦣","🦤","🦥","🦦","🦧","🦨","🦩","🦪","🦫","🦬","🦭","🦮","🦯","🦰","🦱","🦲","🦳","🦴","🦵","🦶","🦷","🦸","🦹","🦺","🦻","🦼","🦽","🦾","🦿","🧀","🧁","🧂","🧃","🧄","🧅","🧆","🧇","🧈","🧉","🧊","🧋","🧌","🧍","🧎","🧏","🧐","🧑","🧒","🧓","🧔","🧕","🧖","🧗","🧘","🧙","🧚","🧛","🧜","🧝","🧞","🧟","🧠","🧡","🧢","🧣","🧤","🧥","🧦","🧧","🧨","🧩","🧪","🧫","🧬","🧭","🧮","🧯","🧰","🧱","🧲","🧳","🧴","🧵","🧶","🧷","🧸","🧹","🧺","🧻","🧼","🧽","🧾","🧿","🩰","🩱","🩲","🩳","🩴","🩵","🩶","🩷","🩸","🩹","🩺","🩻","🩼","🪀","🪁","🪂","🪃","🪄","🪅","🪆","🪇","🪈","🪉","🪊","🪎","🪏","🪐","🪑","🪒","🪓","🪔","🪕","🪖","🪗","🪘","🪙","🪚","🪛","🪜","🪝","🪞","🪟","🪠","🪡","🪢","🪣","🪤","🪥","🪦","🪧","🪨","🪩","🪪","🪫","🪬","🪭","🪮","🪯","🪰","🪱","🪲","🪳","🪴","🪵","🪶","🪷","🪸","🪹","🪺","🪻","🪼","🪽","🪾","🪿","🫀","🫁","🫂","🫃","🫄","🫅","🫆","🫈","🫍","🫎","🫏","🫐","🫑","🫒","🫓","🫔","🫕","🫖","🫗","🫘","🫙","🫚","🫛","🫜","🫟","🫠","🫡","🫢","🫣","🫤","🫥","🫦","🫧","🫨","🫩","🫪","🫯","🫰","🫱","🫲","🫳","🫴","🫵","🫶","🫷","🫸","☀️","☁️","☂️","☃️","☕️","☠️","☢️","☣️","☮️","☯️","☸️","☹️","☺️","♀️","♂️","♟️","♠️","♣️","♥️","♦️","♨️","♻️","♾️","⚒️","⚓️","⚔️","⚕️","⚖️","⚗️","⚙️","⚠️","⚡️","⚪️","⚫️","⚰️","⚱️","⚽️","⚾️","⛄️","⛅️","⛈️","⛎️","⛏️","⛑️","⛓️","⛔️","⛩️","⛪️","⛰️","⛱️","⛲️","⛳️","⛴️","⛵️","⛷️","⛸️","⛹️","⛺️","⛽️","✂️","✅️","✈️","✉️","✊️","✋️","✌️","✍️","✏️","✒️","✔️","✖️","✝️","✡️","✨️","✳️","✴️","❄️","❇️","❌️","❎️","❓️","❔️","❕️","❗️","❣️","❤️","➕️","➖️","➗️","➡️","➰️","➿️","⤴️","⤵️","⬅️","⬆️","⬇️","⬛️","⬜️","⭐️","⭕️","〰️","〽️","㊗️","㊙️","🇬🇧","🇺🇸","🇨🇦","🇦🇺","🇫🇷","🇩🇪","🇮🇹","🇪🇸","🇯🇵","🇨🇳","🇮🇳","🇧🇷","🇮🇪","🇿🇦","🇳🇿","🇰🇷","🇲🇽","🇸🇪","🇳🇴","🇫🇮","🇺🇦","🇬🇷","🇵🇹","🇳🇱","🇨🇭","🇧🇪","🇵🇱","🇹🇷","🇪🇬","🇳🇬","🇰🇪","🇦🇷","🇨🇱","🇨🇴","🇹🇭","🇻🇳","🇵🇭","🇸🇬","🇲🇾","🇮🇩","🇵🇰","🇧🇩","🇦🇪","🇸🇦","🇮🇱","1️⃣","2️⃣","3️⃣","4️⃣","5️⃣","6️⃣","7️⃣","8️⃣","9️⃣","0️⃣","#️⃣","*️⃣","🏳️‍🌈","🏳️‍⚧️","🏴‍☠️","🐈‍⬛","🐻‍❄️","❤️‍🔥","❤️‍🩹","👩‍🚀","👨‍🚀","🧑‍🚀","👩‍🎨","👨‍🎨","🧑‍🎨","👩‍🍳","👨‍🍳","🧑‍🍳","👩‍🔬","👨‍🔬","🧑‍🔬","👩‍💻","👨‍💻","🧑‍💻","👩‍🚒","👨‍🚒","🧑‍🚒","🧚‍♀️","🧚‍♂️","🧜‍♀️","🧜‍♂️","🧛‍♀️","🧛‍♂️","🧟‍♀️","🧟‍♂️","👨‍👩‍👧","👨‍👩‍👦","👩‍👩‍👧","👨‍👨‍👦"];
 const STYLES=["Dreamy Watercolour","Gouache Painting","Impressionist Painting","Post-Impressionist Painting","Expressionist Painting","Fauvist Painting","Cubist Painting","Surrealist Oil Painting","Baroque Oil Painting","Renaissance Oil Painting","Rococo Painting","Neoclassical Painting","Romantic Landscape Painting","Symbolist Painting","Pre-Raphaelite Painting","Dutch Golden Age Still Life","Photorealism Painting","Hyperrealist Painting","Magic Realism Painting","Metaphysical Painting","Naive Folk Painting","Abstract Expressionism","Colour Field Painting","Hard-Edge Painting","Lyrical Abstraction","Tonalist Painting","Luminist Landscape Painting","Pointillist Painting","Divisionist Painting","Art Nouveau Illustration","Art Deco Illustration","Pop Art Painting","Op Art Painting","Suprematist Painting","Orphist Painting","De Stijl Painting","Geometric Abstract Painting","Minimalist Painting","Palette Knife Impasto","Acrylic Pour Painting","Encaustic Wax Painting","Egg Tempera Painting","Fresco Painting","Oil Glazing Painting","Alla Prima Oil Painting","Drybrush Painting","Sgraffito Painting","Iridescent Watercolour","Granulating Watercolour","Wet-on-Wet Watercolour","Ink and Wash Painting","Japanese Sumi-e","Chinese Gongbi Painting","Chinese Shan Shui Painting","Ukiyo-e Woodblock Print","Persian Miniature Painting","Mughal Miniature Painting","Rajput Miniature Painting","Byzantine Icon Painting","Medieval Illuminated Manuscript","Tibetan Thangka Painting","Ukrainian Petrykivka Painting","Korean Minhwa Folk Painting","Mexican Muralism","Social Realist Mural","One-Line Continuous Drawing","Charcoal Gesture Drawing","Graphite Hyperrealism","Coloured Pencil Illustration","Soft Pastel Illustration","Pastel Chalk Drawing","Ballpoint Pen Drawing","Technical Pen Crosshatching","Scratchboard Illustration","Botanical Scientific Illustration","Vintage Zoological Illustration","Architectural Ink Rendering","Linocut Print","Woodcut Print","Copperplate Engraving","Aquatint Etching","Mezzotint Print","Lithographic Illustration","Risograph Print","Silkscreen Illustration","Monotype Print","Cyanotype Print","Minimalist Vector Illustration","Editorial Illustration","Whimsical Storybook Illustration","Dark Fantasy Illustration","Gothic Illustration","Fantasy Concept Art","Vintage Comic Book Illustration","Graphic Novel Illustration","Manga Ink Illustration","Kawaii Character Illustration","Retro Sci-Fi Pulp Illustration","Vintage Travel Poster Illustration","Psychedelic Poster Illustration","Cottagecore Illustration","Cel-Shaded Illustration","Pixel Art","Isometric Pixel Art","Digital Matte Painting","Fantasy Matte Painting","Digital Speed Painting","Painterly Digital Illustration","Chiaroscuro Painting","Tenebrism Painting","Monochromatic Ink Illustration","Duotone Illustration","Trompe-l’oeil Painting","Optical Illusion Illustration","Stippling Ink Illustration","Pen and Ink Hatching","Silhouette Illustration","Academic Realism Painting","American Impressionism","Ashcan School Painting","Australian Tonalism","Bauhaus Painting","Biedermeier Painting","Cloisonnism Painting","Constructivist Painting","Dadaist Collage Illustration","Danish Golden Age Painting","Early Netherlandish Painting","English Watercolour School","Futurist Painting","German Romantic Painting","Hudson River School Painting","Italian Macchiaioli Painting","Japanese Nihonga Painting","Les Nabis Painting","Mannerist Painting","Metaphysical Realism Painting","Naturalist Painting","Neo-Expressionist Painting","Neo-Impressionist Painting","Neo-Pop Painting","Neue Sachlichkeit Painting","Northern Renaissance Painting","Orientalist Painting","Precisionist Painting","Purist Painting","Rayonist Painting","Regionalist Painting","Synthetist Painting","Tenebrism Oil Painting","Vienna Secession Illustration","Vorticist Painting","Viennese Fantastic Realism","Zero Group Abstract Painting","Abstract Illusionism","Action Painting","Automatist Drawing","Biomorphic Abstraction","Concrete Art","Deconstructivist Illustration","Gestural Abstraction","Informel Painting","Kinetic Op Art","Minimalist Geometric Abstraction","Neo-Geo Painting","Pattern and Decoration Painting","Process Painting","Psychedelic Abstract Painting","Radical Painting","Tachisme Painting","Neo-Dada Painting","Graffiti Lettering Art","Street Art Stencil Illustration","Mural Illustration","Chalkboard Illustration","Children's Book Illustration","Picture Book Watercolour Illustration","Golden Age Illustration","Mid-Century Modern Illustration","Modernist Poster Illustration","Flat Design Illustration","Geometric Vector Illustration","Retro-Futurist Illustration","Paper Texture Digital Illustration","Textured Digital Painting","Airbrush Illustration","Digital Airbrush Painting","Digital Oil Painting","Digital Watercolour Painting","Digital Gouache Painting","Digital Pastel Painting","Digital Ink Illustration","Low-Poly Digital Illustration","Voxel Art Illustration","8-Bit Pixel Art","16-Bit Pixel Art","Dithered Pixel Art","Isometric Vector Illustration","Orthographic Technical Illustration","Exploded-View Technical Illustration","Cutaway Scientific Illustration","Medical Anatomical Illustration","Natural History Plate Illustration","Vintage Botanical Engraving","Entomological Scientific Illustration","Astronomical Atlas Illustration","Cartographic Ink Illustration","Pen-and-Wash Architectural Illustration","Urban Sketching","Plein Air Oil Painting","Plein Air Watercolour","Grisaille Painting","Verdaccio Underpainting","Scumbling Oil Painting","Broken Colour Painting","Glazing Watercolour","Negative Painting Watercolour","Salt Texture Watercolour","Masking Fluid Watercolour","Dry-on-Dry Watercolour","Watercolour Lifting Technique","Watercolour Bloom Technique","Watercolour Splatter Technique","Acrylic Impasto Painting","Acrylic Glazing Painting","Acrylic Drybrush Painting","Acrylic Fluid Painting","Acrylic Palette Knife Painting","Oil Impasto Painting","Oil Underpainting","Oil Scumbling Painting","Oil Pointillism","Oil Sfumato Painting","Oil Grisaille Painting","Casein Painting","Distemper Painting","Tempera Grassa Painting","Gum Bichromate Print","Photogravure Print","Collagraph Print","Drypoint Etching","Soft-Ground Etching","Sugar-Lift Aquatint","Chine-Collé Print","Reduction Linocut","Multi-Block Woodcut","Japanese Mokuhanga Woodblock Print","Wood Engraving","Letterpress Illustration","Stencil Print Illustration","Pochoir Print Illustration","Screenprint Halftone Illustration","Duotone Screenprint","Gel Plate Monoprint","Blind Embossed Print","Embossed Paper Illustration","Intaglio Engraving","Hand-Tinted Engraving","Crayon Lithography","Stone Lithography","Photolithographic Illustration","White-Line Woodcut","Ink Monoprint","Etched Line Illustration","Brush Pen Illustration","Dip Pen Illustration","Reed Pen Drawing","Bamboo Pen Drawing","Silverpoint Drawing","Metalpoint Drawing","Red Chalk Drawing","Sanguine Drawing","Conté Crayon Drawing","Black Chalk Drawing","White Chalk on Toned Paper","Three-Chalk Drawing","Carbon Pencil Drawing","Graphite Powder Drawing","Graphite Wash Drawing","Mechanical Pencil Illustration","Marker Rendering","Alcohol Marker Illustration","Water-Based Marker Illustration","Coloured Ink Drawing","India Ink Brush Drawing","Ink Splatter Illustration","Ink Blot Illustration","Ink Resist Drawing","Pointillist Ink Drawing","Contour Line Drawing","Blind Contour Drawing","Cross-Contour Drawing","Hatching Line Drawing","Crosshatching Ink Drawing","Etching-Style Pen Drawing","Tonal Pencil Drawing","Negative Space Drawing","Geometric Line Art","Minimalist Line Art","Doodle Art Illustration","Zentangle Ink Drawing","Calligraphic Brush Illustration","Expressive Gesture Drawing","Figure Study Drawing","Life Drawing in Charcoal","Scribble Art Drawing","Chiaroscuro Charcoal Drawing","Sepia Ink Wash","Bistre Ink Wash","Walnut Ink Illustration","Monochrome Watercolour","Limited Palette Painting","Complementary Colour Painting","Split-Complementary Colour Painting","Analogous Colour Painting","High-Key Painting","Low-Key Painting","Atmospheric Perspective Painting","Aerial Perspective Landscape Painting","Panoramic Landscape Painting","Miniature Landscape Painting","Panoramic Ink Illustration","Panoramic Watercolour Illustration","Isometric Architectural Illustration","Architectural Perspective Watercolour","Trompe-l’œil Architectural Painting","Photorealist Acrylic Painting","Hyperrealist Graphite Drawing","Photorealist Coloured Pencil Drawing","Fantastic Realism Painting","Visionary Art Painting","Oneiric Surrealist Painting","Lowbrow Pop Surrealism","Outsider Art Painting","Art Brut Drawing","Intuitive Abstract Painting","Neo-Fauvist Painting","Contemporary Figurative Painting","Narrative Figurative Painting","Allegorical Painting","Decorative Folk Illustration","Scandinavian Folk Painting","Hindeloopen Folk Painting","Warli Painting","Madhubani Painting","Pattachitra Painting","Kalamkari Painting","Gond Painting","Cheriyal Scroll Painting","Phad Painting","Kalighat Painting","Tanjore Painting","Mysore Painting","Pichwai Painting","Saura Painting","Bhil Painting","Cherokee Ledger-Style Illustration","Ethiopian Icon Painting","Coptic Icon Painting","Russian Icon Painting","Ottoman Miniature Painting","Safavid Miniature Painting","Timurid Miniature Painting","Deccan Miniature Painting","Pahari Miniature Painting","Kangra Miniature Painting","Basohli Miniature Painting","Chinese Xieyi Painting","Chinese Baimiao Line Painting","Japanese Rinpa Painting","Japanese Yamato-e Painting","Japanese Emakimono Illustration","Japanese Kacho-ga Painting","Japanese Suibokuga Ink Painting","Korean Chaekgeori Painting","Korean Munjado Folk Painting","Korean Sumukhwa Ink Painting","Vietnamese Dong Ho Woodblock Print","Vietnamese Hang Trong Folk Painting","Indonesian Wayang Beber Painting","Balinese Kamasan Painting","Batik-Inspired Painted Illustration","Mexican Ex-Voto Painting","Peruvian Cusco School Painting","Haitian Naive Painting","Brazilian Cordel Woodcut Illustration","Australian Aboriginal Dot Painting","Australian Aboriginal X-Ray Painting","New Zealand Kōwhaiwhai Painting","Tingatinga Painting","Ndebele Geometric Wall Painting","African Sign Painting","Ancient Egyptian Fresco Style","Ancient Greek Red-Figure Vase Illustration","Roman Pompeian Fresco Style","Early Christian Manuscript Illustration","Carolingian Manuscript Illumination","Insular Manuscript Illumination","Gothic Manuscript Illustration","Romanesque Manuscript Illustration","Art Nouveau Lithographic Poster","Art Deco Screenprint Poster","Swiss International Typographic Poster Art","Russian Constructivist Poster Illustration","Polish Poster School Illustration","Czech New Wave Poster Illustration","Italian Futurist Poster Art","Bauhaus Poster Illustration","Memphis Design Illustration","Y2K Graphic Illustration","Brutalist Graphic Illustration","Maximalist Pattern Illustration","Minimalist Editorial Illustration","Newspaper Editorial Cartoon","Political Cartoon Illustration","Satirical Caricature Drawing","Vintage Advertising Illustration","Golden Age Comic Strip Illustration","European Ligne Claire Comic Illustration","Franco-Belgian Comic Illustration","American Underground Comix Illustration","Noir Graphic Novel Ink Style","Shōjo Manga Illustration","Seinen Manga Illustration","Josei Manga Illustration","Shōnen Manga Illustration","Webtoon Digital Illustration","Anime Background Painting","Animation Background Gouache","Traditional Cel Animation Illustration","Stop-Motion Concept Illustration","Character Concept Art Painting","Environment Concept Art Painting","Creature Concept Art Painting","Keyframe Concept Illustration","Visual Development Painting","Storyboard Ink Illustration","Matte Painting Photorealism","Photobashing Digital Matte Painting","Painterly Fantasy Illustration","Dark Academia Illustration","Retro Children's Book Illustration","Mid-Century Picture Book Illustration","Risograph Zine Illustration","Indie Comic Zine Illustration","Screen Tone Manga Illustration","Halftone Comic Illustration"];
 STYLES.push(...["Whimsical maximalism", "Quiet surrealism", "Luminous storybook realism", "Baroque sci-fi", "Neo-Victorian fantasy", "Cosy post-apocalyptic", "Retro botanical futurism", "Dreamlike brutalism", "Playful gothic", "Romantic solarpunk", "Ethereal monochrome", "Jewel-toned folklore", "Pastel cosmic fantasy", "Nocturnal impressionism", "Hyper-detailed miniature realism", "Celestial art nouveau", "Graphic folk modernism", "Neon renaissance", "Soft-edged expressionism", "Prismatic fantasy", "Dark whimsical illustration", "Sun-drenched nostalgia", "Moonlit magical realism", "Museum-diorama realism", "Ornate storybook gothic", "Minimalist fairytale", "Cinematic folk horror", "Retro space-age optimism", "Glittering rococo", "Quiet cottagecore realism", "High-contrast pulp fantasy", "Enchanted naturalism", "Painterly retrofuturism", "Tactile handcrafted whimsy", "Colour-blocked surrealism", "Iridescent dreamscape", "Midnight blue romanticism", "Candy-coloured gothic", "Lush maximalist fantasy", "Weathered antique illustration", "Ethereal cosmic noir", "Warm analogue nostalgia", "Miniature-world photorealism", "Decorative mythic symbolism", "Golden-hour cinematic realism", "Soft-focus vintage fantasy", "Monumental fantasy architecture", "Vibrant geometric folklore", "Moody atmospheric realism", "Delicate porcelain fantasy"]);
 
-// Additional cohesive scene families. Each reel has a distinct narrative role.
-const EXTRA_FAMILIES=[
-['Football match','⚽ 🥅 🏆 🧤','🏟️ 🌳 🌆','☀️ 🌧️ 🌈 ✨','👟 🎽 🏅 🎉','a lively football stadium on match day|a floodlit pitch at the final whistle|a village football ground at sunset'],
-['Basketball court','🏀 🏆 🐻 🐰','🏟️ 🌆 🏙️','☀️ 🌙 ✨ ⚡','👟 🏅 🎉 📸','an energetic outdoor basketball court|a packed arena beneath bright spotlights|a rooftop basketball court at dusk'],
-['Tennis tournament','🎾 🐱 🐶 🦊','🏟️ 🌳 🌻','☀️ 🌈 🌤️ ✨','🏆 🏅 🎀 📸','a sunlit grass tennis court|a garden tennis championship|a dramatic stadium centre court'],
-['Seaside holiday','🐬 🐢 🦀 🦜','🏝️ 🌴 🌊 🐚','☀️ 🌅 🌈 ✨','⛵ 🧺 🍍 🥥','a golden tropical beach|a secluded turquoise lagoon|a palm-fringed island cove'],
-['Dinosaur valley','🦖 🦕 🐊 🦎','🌋 🌴 🌳 ⛰️','☀️ 🌫️ ⚡ 🌈','🥚 🪨 🌿 🦋','a prehistoric jungle valley|a misty volcanic landscape|an ancient fern-filled forest'],
-['Dragon kingdom','🐉 🐲 🧙 🦄','🏰 ⛰️ 🌋 🌲','🌙 ✨ ⚡ 🔮','💎 🗝️ 📜 🪄','a dragon-guarded mountain citadel|an ancient castle above the clouds|a glowing cavern beneath a royal fortress'],
-['Jungle expedition','🐒 🦜 🐆 🐘','🌴 🌳 🌿 🏞️','☀️ 🌧️ 🌈 🌫️','🧭 🗺️ 🎒 📸','a lush rainforest expedition|a hidden jungle waterfall|an overgrown trail to a forgotten temple'],
-['Autumn harvest','🦊 🦔 🐿️ 🦉','🍂 🍁 🌾 🌳','🌅 🌙 ☀️ 🌫️','🧺 🍎 🎃 🫖','a golden autumn orchard|a woodland harvest picnic|a cosy village pumpkin patch'],
-['Spring blossom','🐰 🦋 🐝 🐣','🌸 🌷 🌼 🌳','☀️ 🌈 ✨ 🫧','🧺 🫖 🥚 🎀','a blossoming spring garden|a flower-filled orchard|a sunny meadow beside a cottage'],
-['Desert caravan','🐪 🐫 🦊 🦅','🏜️ ⛰️ 🌵 🏛️','☀️ 🌅 🌙 ✨','🧭 🗺️ 💎 🏺','a sweeping desert dune landscape|an oasis beneath ancient cliffs|a caravan trail at golden hour'],
-['Arctic explorers','🐻‍❄️ 🐧 🦭 🦊','❄️ 🏔️ 🌨️ 🧊','🌌 🌙 ⭐ ✨','🛷 🧣 🔭 🧭','an aurora-lit arctic wilderness|a frozen coastal expedition|an icy mountain camp'],
-['Ocean pirates','🦜 🐙 🦈 🧜‍♀️','🚢 ⛵ 🏝️ 🌊','🌅 🌙 🌩️ 🌈','🗺️ 🧭 🗝️ 💎','a pirate ship near a hidden island|a moonlit tropical harbour|a mysterious treasure cove'],
-['Space explorers','👩‍🚀 🧑‍🚀 👽 🤖','🚀 🪐 🌌 🛸','🌠 ⭐ ✨ 💫','🔭 🛰️ 💎 🧪','a distant alien planet|a moon base overlooking a ringed planet|an explorer camp under unfamiliar stars'],
-['Undersea kingdom','🐬 🐙 🐠 🧜‍♀️','🪸 🌊 🐚 🫧','✨ 🌈 💫 🌙','💎 🗝️ 🏰 🚢','a vibrant coral reef kingdom|a glowing underwater grotto|a sunken palace among sea gardens'],
-['Woodland magic','🦊 🦉 🐰 🧚','🌲 🍄 🌿 🌳','🌙 ✨ 🔮 🌟','🗝️ 🪄 📜 🕯️','a glowing enchanted woodland|a hidden mushroom village|a moonlit forest cottage'],
-['Cosy bakery','🐻 🐱 🐰 🦊','🍰 🧁 🍪 🍩','✨ 🌅 💖 🫧','🫖 🍓 🍫 🎀','a warm storybook bakery|a tiny village cake shop|a whimsical patisserie kitchen'],
-['Robot city','🤖 👽 🧑‍🚀 🐱','🏙️ 🚄 🛸 ⚙️','🌃 ⚡ ✨ 💫','🎮 🕹️ 🔧 💡','a futuristic neon street|a high-tech robot workshop|a rooftop above a glowing sci-fi metropolis'],
-['Halloween haunting','👻 🧙 🦇 🐈‍⬛','🎃 🏚️ 🏰 🌲','🌙 🌫️ ⚡ 🔮','🕯️ 🧹 🗝️ 🍬','a pumpkin-lit haunted village|a misty gothic manor|a spooky moonlit forest'],
-['Christmas village','🎅 🦌 ⛄ 🐻‍❄️','🎄 🌲 🏠 ❄️','🌨️ ⭐ ✨ 🌙','🎁 🛷 🧦 🍪','a snowy Christmas village|a festive woodland cabin|a magical North Pole workshop'],
-['Carnival night','🐻 🐱 🦊 🦄','🎡 🎠 🎪 🎈','🎆 ✨ 🌈 🌟','🍭 🎟️ 🎁 🎉','a colourful fairground at night|a glowing carnival midway|a whimsical travelling circus'],
-['Romantic garden','🦢 🦋 🐻 🐱','🌹 🌷 🌸 💐','🌙 ✨ 💖 🌅','💍 🕯️ 🍓 🎀','a romantic rose garden at twilight|a moonlit lakeside gazebo|a flower-filled courtyard'],
-['Countryside farm','🐄 🐑 🐓 🐴','🌾 🌻 🌳 🏡','☀️ 🌈 🌅 🍂','🚜 🧺 🍎 🫖','a peaceful countryside farm|a sunny village orchard|a golden wheat field'],
-['Mountain adventure','🦅 🦊 🐻 🐺','🏔️ ⛰️ 🌲 🏕️','🌅 🌫️ ❄️ 🌈','🎒 🧭 🗺️ 🔭','a mountain trail above the clouds|an alpine campsite|a dramatic valley lookout'],
-['Fairy-tale castle','🦄 🐉 🧙 🦢','🏰 🌹 🌲 🌸','✨ 🌙 🌈 🔮','🗝️ 💎 📜 🪄','a magnificent enchanted castle|a royal rose garden|a palace courtyard beneath the stars'],
-['Music concert','🐱 🦊 🐻 🤖','🎸 🎹 🎷 🥁','🎆 ✨ 🌈 ⚡','🎤 🎧 🎪 🎉','a lively outdoor music festival|a neon rooftop concert|a woodland concert under lanterns'],
-['Birthday surprise','🐻 🐰 🐱 🦄','🎂 🧁 🎈 🎪','✨ 🌈 🎆 💖','🎁 🍭 🎀 📸','a colourful garden birthday party|a magical woodland celebration|a whimsical cake-filled party room'],
-['Easter meadow','🐰 🐣 🐥 🦋','🥚 🌷 🌸 🌼','☀️ 🌈 ✨ 🫧','🧺 🍫 🎀 🏡','a spring meadow with painted eggs|a blossom-filled Easter garden|a sunny woodland egg hunt'],
-['New Year skyline','🤖 🐱 🦄 🐉','🏙️ 🌃 🎡 🎪','🎆 🎇 ✨ 🌟','🎈 🎉 🥂 🎀','a rooftop New Year celebration|a glittering city at midnight|a harbour beneath fireworks'],
-['Ice cream wonderland','🐻 🐰 🦄 🐼','🍦 🍭 🍩 🧁','🌈 ✨ 💖 🌟','🍓 🍒 🍫 🎀','a fantastical dessert village|a pastel ice-cream garden|a candy-coloured fairground'],
-['Wildflower meadow','🦋 🐝 🐞 🐰','🌻 🌼 🌷 🌸','☀️ 🌈 🫧 ✨','🧺 🫖 🍓 🎨','a meadow filled with wildflowers|a sunlit butterfly garden|a flower-filled cottage path'],
-['Mystery detective','🦊 🐱 🦉 🤖','🏚️ 🏰 🌃 🏙️','🌙 🌫️ ⚡ 🕯️','🔍 🗝️ 📜 🔦','a foggy Victorian street|a mysterious old manor|a lamplit detective study']
-];
-const EXTRA_SCENES={};
-for(const [name,subject,setting,atmosphere,prop,scenes] of EXTRA_FAMILIES){
- const t={n:name,a:[subject.split(' '),setting.split(' '),atmosphere.split(' '),prop.split(' ')]};
- THEMES.push(t);EXTRA_SCENES[name]=scenes.split('|');
-}
-// Curated generation: meaningful, drawable symbols only. No signs, UI icons or filler.
-const CORE_THEMES=THEMES.slice(0,23).concat(THEMES.slice(-EXTRA_FAMILIES.length));
-const GOOD_EMOJI=new Set(('🐻 🐼 🐻‍❄️ 🐱 🐶 🦊 🐺 🦁 🐯 🐘 🦒 🦓 🐆 🐒 🦍 🐰 🐇 🦔 🦉 🦅 🦜 🦢 🦆 🐧 🦌 🐴 🐑 🐄 🐓 🐣 🐥 🦋 🐝 🐞 🐢 🐬 🐙 🦈 🐠 🦀 🪼 🐚 🪸 🐉 🦄 🧚 🧜‍♀️ 🧙 👻 🧛 🧟 🤖 👽 👩‍🚀 🧑‍🚀 🎅 🤶 🧑‍🎄 ⛄ 🎃 🦇 🐈‍⬛ 🌲 🌳 🌴 🌿 🍀 🍄 🌻 🌹 🌷 🌸 🌼 🌾 🍂 🏔️ ⛰️ 🏜️ 🏝️ 🌊 🏡 🏠 🏚️ 🏰 🏛️ 🌃 🏙️ 🌌 🪐 🌕 🌙 ☀️ 🌅 🌈 🌧️ 🌨️ ❄️ 🌫️ ⚡ 🌩️ ✨ ⭐ 🌟 💫 🌠 💖 💕 ❤️ 🫧 🔮 🪄 💎 🕯️ 🔥 💧 🍎 🍓 🍒 🍉 🍍 🍑 🥝 🍋 🍊 🍫 🍬 🍭 🍪 🍩 🍰 🧁 🍦 🎂 🥚 🎄 🎁 🎀 🎈 🎉 🎊 🎆 🎇 🎪 🎠 🎡 🎭 🎨 🎸 🎹 🎷 🥁 🎺 🎤 🎧 🪩 🫖 🧺 🧹 🧪 🗝️ 📜 📸 🧭 🗺️ 🎒 🚙 🚜 🚀 🛸 🚢 ⛵ 🛷 🚄 🚁 🛰️ 🔭 ⚙️ 🔧 🛠️ 💡 🎮 🕹️ 🧣 🧦 🥛 🥂 🍾 💍 💐 🪅').split(' '));
-// Keep original category coherence, but discard unhelpful pictograms.
-for(const t of CORE_THEMES){t.a=t.a.map((pool,i)=>pool.filter(e=>GOOD_EMOJI.has(e) && !(i===0 && ['🎉','🎊','🎈','👑','🏴‍☠️','🦾'].includes(e))));}
-// Keep essential characters even when a curated filter excludes their Unicode glyphs.
-const REQUIRED_SUBJECTS={'Football match':['⚽','🥅','🏃','🧑‍🤝‍🧑'],'Dinosaur valley':['🦖','🦕']};
-for(const t of CORE_THEMES){
- if(REQUIRED_SUBJECTS[t.n])t.a[0]=REQUIRED_SUBJECTS[t.n];
- // Never permit an empty reel pool: retain the original scene-specific selection.
- for(let i=0;i<4;i++)if(!t.a[i].length)t.a[i]=['✨'];
-}
-THEMES.length=0;THEMES.push(...CORE_THEMES);
-// All-emojis mode uses the curated, scene-capable collection, not every Unicode glyph.
-const CURATED_EMOJIS=[...new Set(CORE_THEMES.flatMap(t=>t.a.flat()))];
-const ART_STYLES=STYLES.filter(x=>!/(typograph|letterpress|infographic|ascii|terminal|data sculpture|blueprint|patent drawing|technical diagram|chart|poster|advertis|magazine cover|product editorial|product art|ui aesthetic|weather radar|satellite earth|thermal imaging|x-ray|scanning electron|microscopic cellular|anatomical atlas|scientific illustration|star chart|cartographic|one-line|blind contour|reaction diffusion|cellular automata|glitch art|datamoshing|mandala dotwork|geometric pattern|pattern art|gradient mesh|bold flat geometric|generative algorithmic|fractal mandelbrot|spirograph|tessellation|knotwork|floor mosaic|damask ornament|wallpaper|textile pattern|streetwear graphic|skateboard deck|tattoo flash|font|graphic print)/i.test(x));
-STYLES.length=0;STYLES.push(...ART_STYLES);
-const SCENES={...EXTRA_SCENES,
-'Enchanted forest':['a lantern-lit woodland clearing','a hidden moss-covered cottage','an ancient forest beneath towering trees','a moonlit grove of luminous mushrooms'],
-'Cosmic adventure':['a colourful alien planet','a space station overlooking Saturn','a mysterious moon garden','an explorer’s campsite beneath distant galaxies'],
-'Underwater wonder':['a sunken coral garden','a bioluminescent underwater cavern','a coral reef kingdom','an underwater shipwreck garden'],
-'Sweet treats':['a magical patisserie','a whimsical dessert garden','a cosy woodland bakery','a miniature confectionery village'],
-'Wild safari':['a sunlit savannah watering hole','a lush tropical jungle','a golden grassland at dusk','a hidden oasis among red cliffs'],
-'Spooky spectacle':['a haunted woodland manor','a misty graveyard garden','an abandoned moonlit castle','a candlelit gothic courtyard'],
-'City of the future':['a neon-lit futuristic boulevard','a rooftop garden above a cyberpunk city','a floating metropolis at twilight','a bustling robotic night market'],
-'Magical garden':['a secret greenhouse','a wildflower meadow','an enchanted rose garden','a garden of giant luminous flowers'],
-'Winter fantasy':['a snow-covered alpine village','a frozen enchanted forest','an aurora-lit ice kingdom','a cosy cabin beside a frozen lake'],
-'Pirate voyage':['a tropical treasure island','a pirate ship crossing turquoise waves','a secret sea cave','a moonlit harbour'],
-'Music festival':['a woodland music festival','a rooftop concert beneath the stars','a colourful outdoor amphitheatre','a magical night-time fairground'],
-'Royal fairy tale':['a fairy-tale castle garden','a royal ballroom at dusk','an ancient enchanted kingdom','a palace courtyard filled with roses'],
-'Cozy countryside':['a sunlit country farm','a cottage garden in spring','an autumn orchard','a peaceful village market'],
-'Dreamy dessert planet':['a fantastical fruit orchard','a floating island of sweet treats','a candy-coloured garden','a dreamy confectionery landscape'],
-'Ancient adventure':['a forgotten jungle temple','an ancient desert ruin','a lost mountain sanctuary','an overgrown stone courtyard'],
-'Robot workshop':['a quirky inventor’s workshop','a bustling futuristic laboratory','a cosy robot repair studio','a mechanical greenhouse'],
-'Halloween night':['a pumpkin-lit haunted village','a misty Halloween woodland','a gothic castle courtyard','a spooky autumn fairground'],
-'Christmas magic':['a snowy Christmas village','a cosy festive cabin','a magical winter workshop','a lantern-lit pine forest'],
-'Festive celebrations':['a colourful village celebration','a magical garden party','a glowing nighttime carnival','a festive castle courtyard'],
-'Easter spring':['a blossoming spring meadow','a flower-filled cottage garden','a spring woodland clearing','a sunny orchard'],
-'Valentines romance':['a rose-filled moonlit garden','a romantic lakeside gazebo','a dreamy flower market','a candlelit garden courtyard'],
-'Birthday party':['a whimsical woodland birthday party','a colourful garden celebration','a magical bakery birthday scene','a cosy village party'],
-'New Year fireworks':['a glittering rooftop celebration','a moonlit harbour festival','a snowy village at midnight','a futuristic skyline beneath fireworks']};
 // Style-sensitive reels are enabled ONLY when the style HOLD is active.
 // Each visual medium has a coherent set of objects/materials and a suitable scene.
 const STYLE_KITS=[
@@ -250,7 +155,6 @@ return {pools:[['🦊','🐰','🦉','🦋','🐻','🦌'],['🌲','🌳','🌸'
 const OBJECT_NAMES={'🍉':'watermelon','🍍':'pineapple','🍓':'strawberry','🍒':'cherries','🍑':'peach','🥝':'kiwifruit','🍎':'apple','🍋':'lemon','🍊':'orange','🍩':'doughnut','🍰':'cake','🧁':'cupcake','🍦':'ice cream','🍭':'lollipop','🍫':'chocolate','🍪':'cookie','🌹':'rose','🌷':'tulips','🍄':'mushrooms','🎂':'birthday cake','🎄':'Christmas tree','🏰':'castle','🌊':'ocean','🌲':'pine trees','🏔️':'mountains','🪐':'ringed planet','🚀':'rocket','🫖':'teapot','🎁':'gift','🌻':'sunflowers','💖':'soft glowing heart-shaped lights'};
 const ROLE_WORDS=['focal character','visible setting feature or important object','lighting, weather or magical accent','secondary physical prop'];
 function objectName(e){return OBJECT_NAMES[e]||e}
-function sceneDescription(theme,emojis){let options=SCENES[theme.n]||['an imaginative storybook landscape'];let scene=options[rand(options.length)];const fruit=emojis[1];if(['🍉','🍍','🍓','🍒','🍑','🥝','🍎','🍋','🍊'].includes(fruit))scene='a lush fantastical orchard with a prominent '+objectName(fruit);return scene;}
 let chosenScene='an imaginative storybook landscape';
 let recentCombos=[];let recentStyles=[];let recentSubjects=[];let recentScenes=[];
 function recordRecent(arr,val,max){arr.push(val);if(arr.length>max)arr.shift()}
@@ -270,52 +174,85 @@ document.querySelectorAll('[data-hold]').forEach(b=>b.addEventListener('click',(
 function chooseEmoji(pool,used,old){let candidates=pool.filter(x=>!used.has(x)&&x!==old&&!lastEmojis.includes(x));if(!candidates.length)candidates=pool.filter(x=>!used.has(x)&&x!==old);if(!candidates.length)candidates=pool.filter(x=>!used.has(x));return pick(candidates.length?candidates:pool)}
 function display(track,val,sty=false){track.replaceChildren();let d=document.createElement('div');d.className=sty?'style-item':'reel-symbol';d.textContent=val;track.append(d);track.style.transition='none';track.style.transform='translateY(0)'}
 function animateReel(track,windowEl,oldVal,newVal,pool,duration,sty=false){return new Promise(resolve=>{let h=windowEl.clientHeight;let count=sty?13:19;let values=[oldVal];for(let i=0;i<count-1;i++){let candidate=pick(pool);if(candidate===values[values.length-1])candidate=pool[(pool.indexOf(candidate)+1)%pool.length];values.push(candidate)}values.push(newVal);track.replaceChildren();for(let v of values){let d=document.createElement('div');d.className=sty?'style-item':'reel-symbol';d.textContent=v;track.append(d)}track.style.transition='none';track.style.transform='translateY(0px)';windowEl.classList.add('spinning');void track.offsetHeight;requestAnimationFrame(()=>{track.style.transition=`transform ${duration}ms cubic-bezier(.13,.62,.19,1)`;track.style.transform=`translateY(-${(values.length-1)*h}px)`});setTimeout(()=>{windowEl.classList.remove('spinning');display(track,newVal,sty);resolve()},duration+70)})}
+Object.assign(OBJECT_NAMES,{'🌳':'broadleaf tree','🌴':'tropical palm trees','🌿':'lush green foliage','🌸':'cherry blossoms','🌺':'hibiscus flowers','🌼':'wildflowers','🪻':'lavender flowers','🍃':'windblown leaves','🌾':'golden grasses','🌅':'glowing sunset','🌌':'star-filled night sky','🏝️':'tropical island','🪷':'water lilies','🪸':'coral reef','🌫️':'mist','🪨':'natural stone formations','🎋':'bamboo grove','🦌':'deer','🌻':'sunflowers'});
 function promptText(){
  const [subject,detail,atmosphere,prop]=current.map(objectName);
  return `Create an extraordinary ${style} artwork inspired by these four elements: ${subject}, ${detail}, ${atmosphere}, and ${prop}. Invent an original, imaginative scene that brings all four elements together naturally. You decide the setting, environment, composition, action, visual relationships, and story. Make every element recognisable and meaningfully integrated rather than placing unrelated objects side by side. Interpret the elements creatively in the selected art style, with cohesive colours, lighting, textures and depth.`;
 }
 function renderPrompt(){promptEl.textContent=promptText()}
-async function spin(){if(busy)return;if(held.every(Boolean)){statusEl.textContent='🔒 Everything is held! Unlock a reel to spin.';return}busy=true;document.querySelectorAll('[data-hold]').forEach(b=>b.disabled=true);create.disabled=true;create.textContent='🎰 SPINNING…';statusEl.textContent='🎰 Reels spinning — held choices stay put!';let next=[...current],old=[...current],oldStyle=style;
-// A medium (watercolour, collage, sculpture, etc.) is not a subject.
-// Only explicitly subject-specific held styles constrain the emoji scene.
-const CONTENT_STYLE=/flower|floral|botanic|petal|herbarium|pressed flower|underwater|aquatic|coral|marine|seashell|space|cosmic|galax|astral|nebula|sci.fi|cyberpunk|robot|christmas|halloween|haunt|winter|snow|arctic|fairy.tale|dragon|dinosaur|food|cake|candy|dessert|bakery|chocolate|culinary|patisserie|safari|jungle|concert|disco/i;
-let kit=held[4]&&CONTENT_STYLE.test(style)?styleKit(style):null;
-// Held symbols are absolute locks. A style must never prevent a spin.
-// When a held style has specialist pools, it applies only to unlocked reels.
-let compatible=THEMES.map((t,i)=>i).filter(i=>allEmojiMode||held.slice(0,4).every((h,j)=>!h||THEMES[i].a[j].includes(current[j])));
-if(!compatible.length){
- const scores=THEMES.map(t=>held.slice(0,4).reduce((score,h,j)=>score+(h&&t.a[j].includes(current[j])?1:0),0));
- const best=Math.max(...scores);
- compatible=scores.map((score,i)=>score===best?i:-1).filter(i=>i>=0);
+// Subject-specific styles constrain unlocked reels only; a medium never dictates the subject.
+const SUBJECT_STYLE_RULES=[
+ [/pressed flower|floral|botanical|herbarium|flower collage/i, 4],
+ [/underwater|coral reef|marine life|seashell/i, 8],
+ [/christmas|yuletide/i, 21],
+ [/halloween|haunted forest/i, 20],
+ [/winter wonderland|snowy landscape|arctic wildlife/i, 9],
+ [/dragon illustration|dragon art/i, 12],
+ [/dinosaur illustration|prehistoric landscape/i, 15]
+];
+function pickTheme(){
+ const locks=[0,1,2,3].filter(i=>held[i]);
+ const styleTheme=held[4]?SUBJECT_STYLE_RULES.find(([re])=>re.test(style)):null;
+ let ranked=THEMES.map((t,i)=>({i,score:locks.reduce((sum,j)=>sum+(t.a[j].includes(current[j])?10:-8),0)+(styleTheme?(i===styleTheme[1]?12:0):0)}));
+ let best=Math.max(...ranked.map(x=>x.score));
+ let eligible=ranked.filter(x=>x.score===best).map(x=>x.i);
+ if(!locks.length && styleTheme)eligible=[styleTheme[1]];
+ const fresh=eligible.filter(i=>!lastThemes.includes(i));
+ if(fresh.length)eligible=fresh;
+ if(!locks.length&&!styleTheme){
+   const season=new Set([20,21,22]);
+   const natural=eligible.filter(i=>!season.has(i));
+   if(natural.length&&rand(100)<80)eligible=natural;
+ }
+ return pick(eligible);
 }
-let freshThemes=compatible.filter(i=>!lastThemes.includes(i));
-let eligible=freshThemes.length?freshThemes:compatible;
-const seasonal=new Set(['Christmas magic','Halloween night','Easter spring','Valentines romance','Birthday party','New Year fireworks','Festive celebrations','Christmas village','Halloween haunting','Easter meadow','Birthday surprise','New Year skyline']);
-if(!allEmojiMode&&!held.slice(0,4).some(Boolean)){
- const nonSeasonal=eligible.filter(i=>!seasonal.has(THEMES[i].n));
- if(nonSeasonal.length && rand(100)<82)eligible=nonSeasonal;
+function reelPool(theme,i){
+ // Surprise varies the theme on every spin, but never mixes unrelated theme pools.
+ return theme.a[i];
 }
-let idx=pick(eligible);
-lastThemes.push(idx);if(lastThemes.length>Math.min(17,THEMES.length-1))lastThemes.shift();themeIndex=idx;let theme=THEMES[idx];
-let used=new Set(current.filter((_,i)=>held[i]));
-for(let i=0;i<4;i++){if(held[i])continue;let pool=(kit&&kit.pools[i]?.length)?kit.pools[i]:(allEmojiMode?[...new Set(THEMES.flatMap(t=>t.a[i]))]:theme.a[i]);let candidates=pool.filter(e=>!used.has(e)&&e!==current[i]&&(i!==0||!recentSubjects.includes(e))&&!lastEmojis.includes(e));if(!candidates.length)candidates=pool.filter(e=>!used.has(e)&&e!==current[i]);if(!candidates.length)candidates=pool.filter(e=>!used.has(e));
-// Every unlocked reel must receive a NEW symbol, even when the theme's
-// pool is exhausted by held symbols or has only the current symbol.
-if(!candidates.length){
- const alternatives=[...new Set(THEMES.flatMap(t=>t.a[i]))];
- candidates=alternatives.filter(e=>!used.has(e)&&e!==current[i]);
+function nextSymbol(pool,old,used,theme,i){
+ let candidates=pool.filter(x=>x!==old&&!used.has(x));
+ if(!candidates.length){
+   // Expand only within the same theme, not to random objects from every theme.
+   candidates=[...new Set(theme.a.flat())].filter(x=>x!==old&&!used.has(x));
+ }
+ if(!candidates.length){
+   // There are many symbols globally; this is an emergency fallback only.
+   candidates=[...new Set(THEMES.flatMap(t=>t.a[i]))].filter(x=>x!==old&&!used.has(x));
+ }
+ return candidates.length?pick(candidates):old;
 }
-if(!candidates.length)candidates=[...new Set(THEMES.flatMap(t=>t.a.flat()))].filter(e=>!used.has(e)&&e!==current[i]);
-next[i]=pick(candidates);used.add(next[i]);}
-// Avoid repeating the full combination, including after switching modes.
-let signature=next.join('|');for(let attempt=0;recentCombos.includes(signature)&&attempt<40;attempt++){let mutable=[0,1,2,3].filter(i=>!held[i]);if(!mutable.length)break;let j=pick(mutable),pool=(kit&&kit.pools[j]?.length)?kit.pools[j]:(allEmojiMode?[...new Set(THEMES.flatMap(t=>t.a[j]))]:theme.a[j]);let choices=pool.filter(e=>e!==next[j]&&e!==old[j]&&!next.some((v,k)=>k!==j&&v===e));if(choices.length)next[j]=pick(choices);signature=next.join('|')}
-let newStyle=held[4]?style:fromBag('style');
-if(!held[4]){let attempts=0;while((newStyle===style||recentStyles.includes(newStyle))&&attempts++<Math.min(60,STYLES.length)){newStyle=fromBag('style')}}
-recordRecent(recentCombos,signature,120);recordRecent(recentSubjects,next[0],Math.min(15,CORE_THEMES.flatMap(t=>t.a[0]).length-1));recordRecent(recentStyles,newStyle,35);
-let animations=[];for(let i=0;i<4;i++)if(!held[i])animations.push(animateReel(tracks[i],windows[i],old[i],next[i],(kit&&kit.pools[i]?.length)?kit.pools[i]:(allEmojiMode?[...new Set(THEMES.flatMap(t=>t.a[i]))]:theme.a[i]),1000+i*260));if(!held[4])animations.push(animateReel(styleTrack,styleWindow,oldStyle,newStyle,STYLES,1850,true));
-await Promise.all(animations);current=next;style=newStyle;lastEmojis=[...next];spinNumber++;renderPrompt();statusEl.textContent=`✨ Spin ${spinNumber} complete! ${held.filter(Boolean).length} reel(s) held. Enjoy your new creation!`;create.disabled=false;create.textContent='🎰 SPIN AGAIN';busy=false;document.querySelectorAll('[data-hold]').forEach(b=>b.disabled=false)}
+async function spin(){
+ if(busy)return;
+ if(held.every(Boolean)){statusEl.textContent='🔒 Everything is held! Unlock a reel to spin.';return;}
+ busy=true;document.querySelectorAll('[data-hold]').forEach(b=>b.disabled=true);
+ create.disabled=true;create.textContent='🎰 SPINNING…';statusEl.textContent='🎰 Spinning unlocked reels…';
+ try{
+   const old=[...current],oldStyle=style;
+   let idx=pickTheme(),theme=THEMES[idx];
+   lastThemes.push(idx);if(lastThemes.length>12)lastThemes.shift();themeIndex=idx;
+   let next=[...current],used=new Set(current.filter((_,i)=>held[i]));
+   for(let i=0;i<4;i++){
+     if(held[i])continue;
+     next[i]=nextSymbol(reelPool(theme,i),current[i],used,theme,i);
+     used.add(next[i]);
+   }
+   let newStyle=held[4]?style:fromBag('style');
+   if(!held[4]){let attempts=0;while((newStyle===style||recentStyles.includes(newStyle))&&attempts++<60)newStyle=fromBag('style');}
+   let animations=[];
+   for(let i=0;i<4;i++)if(!held[i])animations.push(animateReel(tracks[i],windows[i],old[i],next[i],reelPool(theme,i),850+i*180));
+   if(!held[4])animations.push(animateReel(styleTrack,styleWindow,oldStyle,newStyle,STYLES,1450,true));
+   await Promise.all(animations);
+   current=next;style=newStyle;spinNumber++;
+   recordRecent(recentCombos,next.join('|'),120);
+   recordRecent(recentStyles,newStyle,35);
+   renderPrompt();
+   statusEl.textContent=`✨ Spin ${spinNumber} complete! ${held.filter(Boolean).length} held.`;
+ }catch(error){console.error('Spin error',error);statusEl.textContent='Spin error — please try again.';}
+ finally{create.disabled=false;create.textContent='🎰 SPIN AGAIN';busy=false;document.querySelectorAll('[data-hold]').forEach(b=>b.disabled=false);}
+}
 async function copy(text,msg){try{await navigator.clipboard.writeText(text)}catch(e){let ta=document.createElement('textarea');ta.value=text;document.body.append(ta);ta.select();document.execCommand('copy');ta.remove()}toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400)}
-document.getElementById('emojiMode').addEventListener('click',()=>{if(busy)return;allEmojiMode=!allEmojiMode;const b=document.getElementById('emojiMode');b.setAttribute('aria-pressed',String(allEmojiMode));b.textContent=allEmojiMode?'🌍 MODE: SURPRISE':'🎭 MODE: MATCHING THEMES';document.getElementById('emojiCount').textContent=allEmojiMode?'Fresh surprises with matching scenes':'Matching themes — coordinated subject, setting, atmosphere and detail';statusEl.textContent=allEmojiMode?'🌍 Surprise mode on — discover fresh combinations.':'🎭 Ready for another creative spin.';if(spinNumber&&!held.every(Boolean))spin();});
+document.getElementById('emojiMode').addEventListener('click',()=>{if(busy)return;allEmojiMode=!allEmojiMode;const b=document.getElementById('emojiMode');b.setAttribute('aria-pressed',String(allEmojiMode));b.textContent=allEmojiMode?'🌍 MODE: SURPRISE':'🎭 MODE: MATCHING THEMES';document.getElementById('emojiCount').textContent=allEmojiMode?'Fresh coordinated themes on every spin':'Matching themes — coordinated subject, setting, atmosphere and detail';statusEl.textContent=allEmojiMode?'🌍 Surprise mode on — every spin stays visually coordinated.':'🎭 Ready for another creative spin.';if(spinNumber&&!held.every(Boolean))spin();});
 create.addEventListener('click',spin);document.getElementById('copyPrompt').onclick=()=>spinNumber?copy(promptText(),'Prompt copied ✨'):spin();document.getElementById('copyCombo').onclick=()=>spinNumber?copy(`${current.join(' ')} — ${style}`,'Emojis + style copied'):spin();document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement.tagName)){e.preventDefault();spin()}});
 </script>
 </body></html>
