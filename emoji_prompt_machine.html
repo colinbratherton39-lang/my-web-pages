@@ -86,7 +86,7 @@ h1{margin:9px 0;font-size:clamp(34px,6.5vw,76px);line-height:1.03;filter:drop-sh
     <div class="styleBox"><div class="label">🎨 VISUAL ART STYLE</div><div class="style-reel" id="styleWindow"><div class="style-track" id="styleTrack"><div class="style-item">READY TO SPIN</div></div></div><div class="style-controls"><button class="hold" data-hold="4" aria-pressed="false" type="button">HOLD STYLE</button><button class="cancel-holds" id="cancelHolds" type="button">✕ CANCEL ALL HOLDS</button></div></div>
      <div class="prompt" id="prompt">Press <strong>SPIN</strong> to create a themed emoji combination and art style. Hold any reels you like, then spin the rest.</div>
     <div class="actions"><button class="create" id="create">🎰 SPIN THE REELS</button><button class="secondary" id="copyPrompt">Copy Prompt</button><button class="secondary" id="copyCombo">Copy Emojis + Style</button></div>
-<div class="emoji-mode"><button id="emojiMode" class="mode-toggle" type="button" aria-pressed="false">🎭 MODE: MATCHING THEMES</button><span id="emojiCount">Or switch to the expanded emoji collection</span></div>
+<div class="emoji-mode"><label for="emojiMode">CHOOSE YOUR MODE</label><select id="emojiMode" class="mode-toggle" aria-label="Choose emoji theme"><option value="matching">🎭 Matching themes — varied</option><option value="surprise">🌍 Surprise — all themes</option><option value="christmas">🎄 Christmas</option><option value="halloween">🎃 Halloween</option><option value="easter">🐣 Easter</option><option value="winter">❄️ Winter</option><option value="spring">🌷 Spring and flowers</option><option value="ocean">🌊 Ocean</option><option value="fantasy">🧚 Fantasy</option><option value="space">🚀 Space</option><option value="wildlife">🦁 Wildlife</option><option value="autumn">🍁 Autumn</option><option value="romance">💖 Romance</option><option value="food">🍰 Food and treats</option><option value="city">🏙️ City adventures</option></select><span id="emojiCount">Every mode uses matching emojis and fresh scene ideas.</span></div>
     <div class="status" id="status" aria-live="polite">Pick your favourites and press HOLD to keep them!</div>
     <p class="hint">Flashing green = HELD. Only unheld reels spin. Press Space for another spin.</p>
   </section>
@@ -113,7 +113,7 @@ const THEMES=[
 {n:"Safari sunset",a:[["🦁", "🐘", "🦒", "🦓", "🐆", "🦏"], ["🌳", "🌾", "🌴", "🏜️", "🌿"], ["🌅", "☀️", "🌤️", "🌈"], ["🌾", "🍃", "🌻", "🪨"]]},
 {n:"Rainforest adventure",a:[["🐒", "🦜", "🐍", "🐆", "🦋", "🐸"], ["🌴", "🌳", "🌿", "🌺", "🍃"], ["🌧️", "🌈", "☀️", "🌫️"], ["🌺", "🍄", "🌸", "🪷"]]},
 {n:"Desert oasis",a:[["🐪", "🦎", "🦂", "🦅", "🐍"], ["🏜️", "🌴", "🌵", "⛰️", "🪨"], ["🌅", "☀️", "🌙", "✨"], ["🌵", "🌴", "🪨", "🌾"]]},
-{n:"Romantic roses",a:[["🦢", "🦋", "🕊️", "🦄", "🐇"], ["🌹", "🌷", "🌸", "🌺", "🪷"], ["🌅", "🌙", "✨", "💖"], ["💐", "🌹", "🌸", "💗"]]},
+{n:"Romantic roses",a:[["👩‍❤️‍👨", "👩‍❤️‍👩", "👨‍❤️‍👨", "💑", "👩", "👨", "🧑", "👰", "🤵"], ["🌹", "🌷", "🌸", "🌺", "🪷"], ["🌅", "🌙", "✨", "💖"], ["💐", "🌹", "🌸", "💗"]]},
 {n:"Haunted forest",a:[["🦇", "🦉", "🐈‍⬛", "👻", "🐺"], ["🌲", "🌳", "🕸️", "🍄", "🏚️"], ["🌕", "🌫️", "🌙", "⚡", "✨"], ["🕷️", "🍂", "🪦", "🦇"]]},
 {n:"Christmas woodland",a:[["🦌", "🦊", "🐻‍❄️", "⛄", "🎅"], ["🎄", "🌲", "❄️", "🏔️"], ["✨", "🌟", "🌙", "🌨️"], ["🎁", "❄️", "🔔", "🎀"]]},
 {n:"Easter garden",a:[["🐰", "🐇", "🐣", "🐥", "🦋"], ["🌷", "🌸", "🌼", "🌿", "🌳"], ["🌈", "☀️", "✨", "🌤️"], ["🥚", "🌷", "🌺", "🌼"]]},
@@ -218,10 +218,39 @@ function nextSymbol(pool,old,used,theme,i){
  }
  if(!candidates.length){
    // There are many symbols globally; this is an emergency fallback only.
-   candidates=[...new Set(THEMES.flatMap(t=>t.a[i]))].filter(x=>x!==old&&!used.has(x));
+   candidates=pool.filter(x=>!used.has(x));
  }
  return candidates.length?pick(candidates):old;
 }
+
+// Each mode has coherent ROLE pools: character, location, atmosphere, supporting prop.
+const EXTRA_THEMES=[
+{n:'Christmas market',mode:'christmas',a:[['🎅','🤶','🧑‍🎄','🦌','⛄','🧝','👼','🐧','🐻‍❄️'],['🎄','🏘️','🏠','⛪','🛷','🌲','🏡','🎪'],['❄️','🌨️','✨','🌟','🌙','☃️','🕯️','🌌'],['🎁','🔔','🧦','🎀','🍪','🥛','🍬','🍭','🧸','🕯️','🎶','🍫']]},
+{n:'Christmas bakery',mode:'christmas',a:[['🤶','🎅','🧑‍🍳','🧝','🐻','🐰','🦌'],['🏠','🏡','🎄','🫖','🧁','🍪','🥧'],['✨','❄️','🌟','🕯️','🌨️'],['🍪','🥧','🍰','🍫','🍬','🍭','🎁','🎀','☕','🧦']]},
+{n:'Christmas snowy adventure',mode:'christmas',a:[['🦌','🐻‍❄️','🐧','⛄','🎅','🧝','🦊','🐺'],['🛷','🌲','🎄','🏔️','🏡','⛸️','⛷️'],['❄️','🌨️','🌌','🌙','🌟','✨'],['🎁','🔔','🧣','🧤','🧦','🎀','🧸','🕯️']]},
+{n:'Halloween party',mode:'halloween',a:[['👻','🧛','🧙','🧟','🦇','🐈‍⬛','🎃'],['🏚️','🏰','🪦','🕸️','🌲'],['🌕','🌙','🌫️','⚡','✨'],['🎃','🍬','🕷️','🕯️','🔮','🧹']]},
+{n:'Easter celebration',mode:'easter',a:[['🐰','🐇','🐣','🐥','🦋','🐑'],['🌷','🌼','🌸','🏡','🌿'],['🌈','☀️','✨','🌤️'],['🥚','🧺','🥕','🌷','🍫','🎀']]},
+{n:'Cosy winter',mode:'winter',a:[['🐧','🦊','🦌','🐻‍❄️','⛄','🦉'],['🏔️','🏡','🌲','❄️','🛷'],['🌨️','🌌','🌙','✨','🌟'],['🧣','🧤','☕','🕯️','🧦','🧸']]},
+{n:'Spring blossom',mode:'spring',a:[['🐝','🦋','🐞','🐇','🐦','🦔'],['🌷','🌸','🌼','🌿','🌳','🪻'],['🌈','☀️','✨','🌤️','🌅'],['🪺','🧺','🌹','💐','🍓','🍀']]},
+{n:'Deep ocean',mode:'ocean',a:[['🐬','🐙','🦈','🐠','🐢','🦭','🪼','🦀'],['🌊','🪸','🐚','🏝️','🪼'],['🫧','✨','☀️','🌈','🌅'],['🐚','🪸','🦪','🪼','🫧']]},
+{n:'Magical kingdom',mode:'fantasy',a:[['🧚','🦄','🐉','🧙','🧝','🧜','🦋'],['🏰','🌲','🍄','🌌','🪷'],['✨','🌙','💫','🌈','🌟'],['🔮','🪄','💎','👑','📜','🗝️']]},
+{n:'Galactic journey',mode:'space',a:[['👩‍🚀','👨‍🚀','🧑‍🚀','👽','🤖'],['🚀','🪐','🌌','🛸','🌕'],['🌠','☄️','✨','🌟','💫'],['🔭','🛰️','🪐','🌍','🧭']]},
+{n:'Wildlife expedition',mode:'wildlife',a:[['🦁','🐘','🦒','🦓','🐆','🦏','🦍','🦜'],['🌳','🌾','🏞️','🌴','🏜️'],['🌅','☀️','🌈','🌤️'],['🪵','🍃','🌻','🪨','🌿']]},
+{n:'Autumn harvest',mode:'autumn',a:[['🦊','🦔','🐿️','🦉','🐻'],['🍁','🍂','🌳','🏡','🌾'],['🌅','🌙','🌫️','✨','☀️'],['🎃','🍎','🍄','🌽','🥧','🧺']]},
+{n:'Romantic garden',mode:'romance',a:[['👩‍❤️‍👨','👩‍❤️‍👩','👨‍❤️‍👨','💑','👩','👨','🧑','👰','🤵'],['🌹','🌷','🌸','🏰','🌿'],['💖','✨','🌅','🌙','🌟'],['💐','💌','💍','🎀','🕯️']]},
+{n:'Sweet bakery',mode:'food',a:[['🧑‍🍳','👩‍🍳','👨‍🍳','🐻','🐰','🦊'],['🏠','🏡','🧁','🍰','🍩'],['✨','☀️','🌈','🌅'],['🍪','🥐','🥧','🍓','🍫','☕']]},
+{n:'City at night',mode:'city',a:[['🧑‍🎨','👩‍🎨','👨‍🎨','🕵️','🤖','🐈'],['🌃','🌆','🌉','🏙️','🎡'],['🌙','🌧️','✨','🌟','🌅'],['🚕','🎈','📷','🎨','☕','🎭']]}
+];
+const THEME_MODES={christmas:/christmas/i,halloween:/haunted|halloween/i,easter:/easter/i,winter:/winter|ice palace|northern lights/i,spring:/spring|blossom|flower|lavender|butterfly/i,ocean:/ocean|coral|waterfall/i,fantasy:/fairy|dragon|celestial|castle|storybook/i,space:/space/i,wildlife:/safari|rainforest|mountain|prehistoric/i,autumn:/autumn|harvest/i,romance:/romantic/i};
+THEMES.push(...EXTRA_THEMES);
+const sceneActions=['discovering a hidden secret','celebrating a joyful occasion','setting off on a daring journey','finding an unexpected treasure','sharing a quiet magical moment','exploring a forgotten place','preparing for a grand festival','escaping a sudden storm','creating something extraordinary','watching an impossible phenomenon','helping an unlikely friend','arriving at a mysterious destination','following a trail of glowing clues','transforming an ordinary place into a wonder','staging a playful surprise','uncovering a miniature world','welcoming the first light of day','enjoying a cosy evening gathering','crossing a remarkable landscape','encountering a gentle magical creature'];
+const compositions=['cinematic wide establishing shot','intimate close-up with intricate details','dynamic low-angle viewpoint','bird’s-eye-view miniature diorama','dramatic silhouette composition','layered storybook panorama','symmetrical theatrical tableau','candid documentary-style moment','isometric cutaway world','foreground-framed atmospheric scene','off-centre editorial composition','macro photography-inspired perspective','over-the-shoulder narrative viewpoint','sweeping aerial perspective','ornate illustrated vignette'];
+const palettes=['rich jewel tones','soft pastel colours','warm amber and deep indigo','frosty silver and midnight blue','vibrant complementary colours','muted vintage colours','glowing gold and emerald','dusky violet and coral','earthy natural colours','high-contrast monochrome with one accent'];
+let recentIdeas=[];let sceneIdea=null;
+function freshIdea(){let idea,key,attempt=0;do{idea={action:pick(sceneActions),composition:pick(compositions),palette:pick(palettes)};key=Object.values(idea).join('|')}while(recentIdeas.includes(key)&&++attempt<100);recordRecent(recentIdeas,key,100);return idea}
+function describeEmoji(e){return OBJECT_NAMES[e]||({'🎅':'Santa Claus','🤶':'Mrs Claus','🧑‍🎄':'a festive gift-giver','🧝':'a cheerful elf','🎄':'decorated Christmas tree','🛷':'sleigh','🕯️':'candlelight','🧦':'Christmas stocking','🔔':'jingle bells','🎀':'festive ribbons','🍪':'freshly baked biscuits','❄️':'falling snow','🌨️':'snowfall','🧙':'wizard','🧺':'woven basket','🏙️':'city skyline','🧑‍🍳':'baker','🪄':'magic wand','🗝️':'antique key'})[e]||e}
+function promptText(){const d=current.map(describeEmoji),idea=sceneIdea||freshIdea(),theme=THEMES[themeIndex]?.n||'imaginative world';return `FOUR SELECTED EMOJIS (all four MUST appear in the finished image): ${current.join(' ')}.\n\nEmoji 1 ${current[0]} = ${d[0]} (main character or subject). Emoji 2 ${current[1]} = ${d[1]} (location or major setting). Emoji 3 ${current[2]} = ${d[2]} (atmospheric feature). Emoji 4 ${current[3]} = ${d[3]} (important story prop).\n\nCreate a DISTINCT, original image in ${style} style. Theme: ${theme}. Depict a scene about ${idea.action}, using a ${idea.composition} and ${idea.palette}. Include ALL FOUR specified emoji concepts as clearly recognisable visual elements, with none missing, substituted or merely implied. Make them logically connected within ONE believable scene, with purposeful interactions, distinctive storytelling, rich textures, and carefully designed lighting. Do not draw literal floating emoji icons, text, logos, or watermarks; depict the four things represented by the emojis. Avoid generic repeated arrangements. Treat this as a completely new visual concept, not a variation of the previous image.`}
+function chooseThemeForMode(){const mode=document.getElementById('emojiMode').value;let choices=THEMES.map((t,i)=>i).filter(i=>mode==='matching'||mode==='surprise'||THEMES[i].mode===mode||(THEME_MODES[mode]&&THEME_MODES[mode].test(THEMES[i].n)));const locks=[0,1,2,3].filter(i=>held[i]);if(locks.length){let matching=choices.filter(i=>locks.every(j=>THEMES[i].a[j].includes(current[j])));if(matching.length)choices=matching;else {const ranked=choices.map(i=>({i,score:locks.filter(j=>THEMES[i].a[j].includes(current[j])).length}));const max=Math.max(...ranked.map(x=>x.score));choices=ranked.filter(x=>x.score===max).map(x=>x.i)}}const fresh=choices.filter(i=>!lastThemes.includes(i));return pick(fresh.length?fresh:choices)}
 async function spin(){
  if(busy)return;
  if(held.every(Boolean)){statusEl.textContent='🔒 Everything is held! Unlock a reel to spin.';return;}
@@ -229,7 +258,7 @@ async function spin(){
  create.disabled=true;create.textContent='🎰 SPINNING…';statusEl.textContent='🎰 Spinning unlocked reels…';
  try{
    const old=[...current],oldStyle=style;
-   let idx=pickTheme(),theme=THEMES[idx];
+   let idx=chooseThemeForMode(),theme=THEMES[idx];
    lastThemes.push(idx);if(lastThemes.length>12)lastThemes.shift();themeIndex=idx;
    let next=[...current],used=new Set(current.filter((_,i)=>held[i]));
    for(let i=0;i<4;i++){
@@ -243,7 +272,7 @@ async function spin(){
    for(let i=0;i<4;i++)if(!held[i])animations.push(animateReel(tracks[i],windows[i],old[i],next[i],reelPool(theme,i),850+i*180));
    if(!held[4])animations.push(animateReel(styleTrack,styleWindow,oldStyle,newStyle,STYLES,1450,true));
    await Promise.all(animations);
-   current=next;style=newStyle;spinNumber++;
+   current=next;style=newStyle;sceneIdea=freshIdea();spinNumber++;
    recordRecent(recentCombos,next.join('|'),120);
    recordRecent(recentStyles,newStyle,35);
    renderPrompt();
@@ -252,7 +281,7 @@ async function spin(){
  finally{create.disabled=false;create.textContent='🎰 SPIN AGAIN';busy=false;document.querySelectorAll('[data-hold]').forEach(b=>b.disabled=false);}
 }
 async function copy(text,msg){try{await navigator.clipboard.writeText(text)}catch(e){let ta=document.createElement('textarea');ta.value=text;document.body.append(ta);ta.select();document.execCommand('copy');ta.remove()}toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400)}
-document.getElementById('emojiMode').addEventListener('click',()=>{if(busy)return;allEmojiMode=!allEmojiMode;const b=document.getElementById('emojiMode');b.setAttribute('aria-pressed',String(allEmojiMode));b.textContent=allEmojiMode?'🌍 MODE: SURPRISE':'🎭 MODE: MATCHING THEMES';document.getElementById('emojiCount').textContent=allEmojiMode?'Fresh coordinated themes on every spin':'Matching themes — coordinated subject, setting, atmosphere and detail';statusEl.textContent=allEmojiMode?'🌍 Surprise mode on — every spin stays visually coordinated.':'🎭 Ready for another creative spin.';if(spinNumber&&!held.every(Boolean))spin();});
+document.getElementById('emojiMode').addEventListener('change',()=>{if(busy)return;const v=document.getElementById('emojiMode').value;allEmojiMode=v==='surprise';statusEl.textContent='🎭 Selected: '+document.getElementById('emojiMode').selectedOptions[0].textContent+'. Spin to create a fresh scene.';});
 create.addEventListener('click',spin);document.getElementById('copyPrompt').onclick=()=>spinNumber?copy(promptText(),'Prompt copied ✨'):spin();document.getElementById('copyCombo').onclick=()=>spinNumber?copy(`${current.join(' ')} — ${style}`,'Emojis + style copied'):spin();document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement.tagName)){e.preventDefault();spin()}});
 </script>
 </body></html>
