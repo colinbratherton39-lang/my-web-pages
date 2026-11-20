@@ -41,7 +41,7 @@ async function start(){
  const userSnapshot=await getDoc(doc(db,'members',user.uid)).catch(()=>null);
  if(!userSnapshot?.exists()||userSnapshot.data().active!==true){$('status').textContent='Account awaiting approval';$('loginError').textContent='Your account is not approved yet. Please wait for the admin.';return;}
  me=user;profile=userSnapshot.data();$('loginPanel').classList.add('hidden');$('chatPanel').classList.remove('hidden');$('signOut').classList.remove('hidden');$('status').textContent='🟢 Connected to live chat';$('identity').textContent=`${profile.name} (${profile.role})`;
- const canModerate=profile.role==='admin';
+ const canModerate=profile.role==='admin'||profile.role==='moderator';
  unsubscribe=onSnapshot(query(collection(db,'messages'),orderBy('createdAt','desc'),limit(100)),async snap=>{
  records=new Map(snap.docs.map(d=>[d.id,{id:d.id,...d.data()}]));
  // Fetch approved members' display names for messages, including older messages.
