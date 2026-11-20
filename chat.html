@@ -20,7 +20,7 @@ async function start(){
  import('https://www.gstatic.com/firebasejs/11.10.0/firebase-storage.js')]);
  const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),storage=getStorage(app);
  $('setup').classList.add('hidden');$('loginPanel').classList.remove('hidden');
- let me=null,profile=null,unsubscribe=null,unsubscribeMembers=null,unsubscribeRequests=null,replyTo=null,records=new Map();
+ let me=null,profile=null,unsubscribe=null,unsubscribeMembers=null,unsubscribeRequests=null,replyTo=null,records=new Map(),memberNames=new Map();
  $('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginError').textContent='';try{await signInWithEmailAndPassword(auth,$('email').value,$('password').value)}catch(err){$('loginError').textContent='Unable to sign in. Check your details or ask the admin.'}});
  $('registerForm').addEventListener('submit',async e=>{
   e.preventDefault();const status=$('registerStatus');status.textContent='Creating your request…';
@@ -35,18 +35,25 @@ async function start(){
   finally{button.disabled=false;}
  });
  $('signOut').onclick=()=>signOut(auth);
- function clearSession(){unsubscribe?.();unsubscribe=null;unsubscribeMembers?.();unsubscribeMembers=null;unsubscribeRequests?.();unsubscribeRequests=null;me=null;profile=null;replyTo=null;records.clear();$('chatPanel').classList.add('hidden');$('signOut').classList.add('hidden');$('adminPanel').classList.add('hidden');$('loginPanel').classList.remove('hidden');$('messages').replaceChildren();}
+ function clearSession(){unsubscribe?.();unsubscribe=null;unsubscribeMembers?.();unsubscribeMembers=null;unsubscribeRequests?.();unsubscribeRequests=null;me=null;profile=null;replyTo=null;records.clear();memberNames.clear();$('chatPanel').classList.add('hidden');$('signOut').classList.add('hidden');$('adminPanel').classList.add('hidden');$('loginPanel').classList.remove('hidden');$('messages').replaceChildren();}
  onAuthStateChanged(auth,async user=>{
  clearSession();if(!user){$('status').textContent='Sign in to chat';return;}
  const userSnapshot=await getDoc(doc(db,'members',user.uid)).catch(()=>null);
  if(!userSnapshot?.exists()||userSnapshot.data().active!==true){$('status').textContent='Account awaiting approval';$('loginError').textContent='Your account is not approved yet. Please wait for the admin.';return;}
  me=user;profile=userSnapshot.data();$('loginPanel').classList.add('hidden');$('chatPanel').classList.remove('hidden');$('signOut').classList.remove('hidden');$('status').textContent='🟢 Connected to live chat';$('identity').textContent=`${profile.name} (${profile.role})`;
  const canModerate=profile.role==='admin';
- unsubscribe=onSnapshot(query(collection(db,'messages'),orderBy('createdAt','desc'),limit(100)),snap=>{
- records=new Map(snap.docs.map(d=>[d.id,{id:d.id,...d.data()}]));const frag=document.createDocumentFragment();
+ unsubscribe=onSnapshot(query(collection(db,'messages'),orderBy('createdAt','desc'),limit(100)),async snap=>{
+ records=new Map(snap.docs.map(d=>[d.id,{id:d.id,...d.data()}]));
+ // Fetch approved members' display names for messages, including older messages.
+ const senderIds=[...new Set([...records.values()].map(m=>m.uid).filter(Boolean))];
+ await Promise.all(senderIds.map(async uid=>{
+  if(uid===me.uid){memberNames.set(uid,{name:profile.name,role:profile.role});return;}
+  try{const member=await getDoc(doc(db,'members',uid));if(member.exists())memberNames.set(uid,{name:member.data().name||'Member',role:member.data().role||'member'});}catch(e){}
+ }));
+ const frag=document.createDocumentFragment();
  for(const item of [...records.values()].reverse()){
- const article=document.createElement('article');article.className='message';const meta=document.createElement('div');meta.className='meta';const author=document.createElement('strong');author.textContent=item.uid===me.uid?profile.name:(item.uid||'Member');meta.append(author);
- const role=document.createElement('span');role.className='small muted';role.textContent=item.uid===me.uid?profile.role:'member';meta.append(role);
+ const article=document.createElement('article');article.className='message';const meta=document.createElement('div');meta.className='meta';const author=document.createElement('strong');author.textContent=memberNames.get(item.uid)?.name||item.authorName||'Former member';meta.append(author);
+ const role=document.createElement('span');role.className='small muted';role.textContent=memberNames.get(item.uid)?.role||'member';meta.append(role);
  const time=document.createElement('span');time.className='small muted';time.textContent=item.createdAt?.toDate?.().toLocaleString()||'Just now';meta.append(time);article.append(meta);
  if(item.replyTo?.text){const r=document.createElement('div');r.className='reply';r.textContent=`↪ ${item.replyTo.name}: ${item.replyTo.text.slice(0,120)}`;article.append(r);}
  if(item.text){const body=document.createElement('div');body.className='body';body.textContent=item.text;article.append(body);}
