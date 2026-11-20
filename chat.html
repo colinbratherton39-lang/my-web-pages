@@ -62,9 +62,10 @@ async function start(){
   for(const request of snap.docs){const data=request.data();if(data.status!=='pending')continue;count++;
    const row=document.createElement('div');row.className='row';row.style.margin='12px 0';
    const label=document.createElement('span');label.className='grow';label.textContent=`${data.name} — ${data.email}`;row.append(label);
+   const roleChoice=document.createElement('select');for(const roleName of ['member','moderator','admin']){const option=document.createElement('option');option.value=roleName;option.textContent=roleName.charAt(0).toUpperCase()+roleName.slice(1);roleChoice.append(option);}row.append(roleChoice);
    const approve=document.createElement('button');approve.textContent='Approve';approve.onclick=async()=>{
     approve.disabled=true;reject.disabled=true;
-    try{await setDoc(doc(db,'members',request.id),{name:data.name,role:'member',active:true});await updateDoc(doc(db,'joinRequests',request.id),{status:'approved'});}
+    try{await setDoc(doc(db,'members',request.id),{name:data.name,role:roleChoice.value,active:true});await updateDoc(doc(db,'joinRequests',request.id),{status:'approved'});}
     catch(err){alert('Could not approve: '+err.message);approve.disabled=false;reject.disabled=false;}
    };
    const reject=document.createElement('button');reject.className='danger';reject.textContent='Reject';reject.onclick=async()=>{
@@ -75,7 +76,28 @@ async function start(){
    row.append(approve,reject);list.append(row);
   }
   if(!count)list.textContent='No pending requests.';
- },err=>{$('requestsList').textContent='Unable to load requests: '+err.message});unsubscribeMembers=onSnapshot(collection(db,'members'),snap=>{const list=$('memberList');list.replaceChildren();for(const m of snap.docs){const row=document.createElement('div');row.className='row';row.style.marginTop='10px';const label=document.createElement('span');label.className='grow';label.textContent=`${m.data().name||m.id} — ${m.data().role} — ${m.data().active?'Active':'Disabled'} (${m.id})`;row.append(label);if(m.id!==me.uid){const toggle=document.createElement('button');toggle.className='secondary';toggle.textContent=m.data().active?'Disable':'Enable';toggle.onclick=async()=>{try{await updateDoc(doc(db,'members',m.id),{active:!m.data().active})}catch(err){alert(err.message)}};row.append(toggle);}list.append(row);}});
+ },err=>{$('requestsList').textContent='Unable to load requests: '+err.message});unsubscribeMembers=onSnapshot(collection(db,'members'),snap=>{
+  const list=$('memberList');list.replaceChildren();
+  for(const m of snap.docs){
+   const data=m.data(),isSelf=m.id===me.uid;
+   const row=document.createElement('div');row.className='row';row.style.marginTop='12px';
+   const label=document.createElement('span');label.className='grow';label.style.overflowWrap='anywhere';
+   label.textContent=`${data.name||m.id} — ${data.active?'Active':'Disabled'} (${m.id})`;row.append(label);
+   if(!isSelf){
+    const roleSelect=document.createElement('select');
+    for(const roleName of ['member','moderator','admin']){const opt=document.createElement('option');opt.value=roleName;opt.textContent=roleName.charAt(0).toUpperCase()+roleName.slice(1);roleSelect.append(opt);}
+    roleSelect.value=['member','moderator','admin'].includes(data.role)?data.role:'member';
+    const save=document.createElement('button');save.className='secondary';save.textContent='Save role';
+    save.onclick=async()=>{try{await updateDoc(doc(db,'members',m.id),{role:roleSelect.value});$('adminStatus').textContent='Role updated for '+(data.name||m.id);}catch(err){alert('Could not update role: '+err.message)}};
+    const toggle=document.createElement('button');toggle.className='secondary';toggle.textContent=data.active?'Disable':'Enable';
+    toggle.onclick=async()=>{try{await updateDoc(doc(db,'members',m.id),{active:!data.active})}catch(err){alert(err.message)}};
+    const remove=document.createElement('button');remove.className='danger';remove.textContent='Delete';
+    remove.onclick=async()=>{if(!confirm(`Remove ${data.name||m.id} from chat membership? They will lose chat access. Their Firebase login will still exist.`))return;try{await deleteDoc(doc(db,'members',m.id));$('adminStatus').textContent='Chat membership deleted.';}catch(err){alert('Could not delete membership: '+err.message)}};
+    row.append(roleSelect,save,toggle,remove);
+   }else{const own=document.createElement('span');own.className='muted';own.textContent='Your account — '+data.role;row.append(own);}
+   list.append(row);
+  }
+ });
  }
  });
  $('cancelReply').onclick=()=>{replyTo=null;$('replyBanner').classList.add('hidden')};
