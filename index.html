@@ -135,6 +135,14 @@ body.tool-open>main.wrap{display:none}
 .live-chat-button:hover,.live-chat-button:focus-visible{transform:scale(1.025);filter:drop-shadow(0 0 18px rgba(0,225,255,.6))}
 .live-chat-button:focus-visible{outline:3px solid #fff;outline-offset:4px}
 </style>
+<style id="billiards-hub-style">
+#billiards-view{display:none;min-height:100vh;background:#05091a}
+#billiards-view.active{display:block}
+#billiards-back{display:block;width:100%;border:0;background:linear-gradient(90deg,#112b60,#39145b);color:white;text-align:left;padding:15px 24px;font:800 15px system-ui;cursor:pointer}
+#billiards-back:hover,#billiards-back:focus-visible{background:linear-gradient(90deg,#1353a0,#65258c)}
+#billiards-frame{display:block;width:100%;height:calc(100vh - 52px);min-height:780px;border:0;background:#05091a}
+@media(max-width:700px){#billiards-frame{min-height:760px}}
+</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -162,6 +170,8 @@ body.tool-open>main.wrap{display:none}
 </div>
 <!-- New additions appear first. Older entries have no recorded addition dates; their original order is retained. -->
 <section class="grid">
+<a class="card" data-added="2026-11-21" href="#billiards" id="billiards-card"><div class="icon" aria-hidden="true">🎱</div><div><h2>It’s a Bing Thing Billiards</h2><p>Pot three coloured balls to create a three-word AI image prompt. Optional aiming guide.</p><span>PLAY THE GAME →</span></div></a>
+
 <a class="card" data-added="2026-11-16" href="It%27s%20a%20Bing%20Thing%20HOOPS.html"><div class="icon" aria-hidden="true">🏀</div><div><h2>It's a Bing Thing HOOPS</h2><p>Choose your American sport, score five hoops and unlock a sports-themed AI image prompt.</p><span>PLAY THE GAME →</span></div></a>
 
 <a class="card" data-added="2026-11-14" href="Its_a_Bing_Thing_Prompt_Scrabble.html"><div class="icon" aria-hidden="true"><span style="display:inline-flex;position:relative;align-items:center;justify-content:center;width:43px;height:43px;border-radius:5px;background:linear-gradient(145deg,#f5ddb0,#c99c62);border:2px solid #a77a44;box-shadow:inset 0 2px 2px #fff8,0 3px 7px #0008;color:#33200e;font:900 29px Georgia,serif;filter:none">S<small style="position:absolute;right:4px;bottom:2px;font:700 10px Arial,sans-serif">1</small></span></div><div><h2>It’s a Bing Thing Prompt Scrabble</h2><p>Play Scrabble against the computer and turn your played words into a creative AI artwork prompt.</p><span>PLAY THE GAME →</span></div></a>
@@ -478,19 +488,22 @@ function renderSaved(){function entries(items,target){$(target).innerHTML=items.
 " title="Whisperglow Storycraft Junk Journal Prompt Atelier"></iframe>
 </div>
 <div id="victorian-studio-view"><button id="victorian-studio-back" type="button">← Back to Creative Hub</button><iframe allow="clipboard-write" id="victorian-studio-frame" loading="lazy" src="Its_a_Bing_Thing_Victorian_Illustrations_Studio.html" title="Vintage Victorian Illustrations Studio"></iframe></div>
+<div id="billiards-view"><button id="billiards-back" type="button">← Back to Creative Hub</button><iframe id="billiards-frame" title="It’s a Bing Thing Billiards" allow="clipboard-write" loading="lazy" src="Its_a_Bing_Thing_Billiards.html"></iframe></div>
 <script>
 (function(){
   const nameView=document.getElementById('name-art-studio-view');
   const view=document.getElementById('whisperglow-view');
   const resizerView=document.getElementById('image-resizer-view');
   const victorianView=document.getElementById('victorian-studio-view');
-  function update(){const nameOpen=location.hash==='#name-art-studio';const open=location.hash==='#whisperglow';const resizeOpen=location.hash==='#image-resizer';const victorianOpen=location.hash==='#victorian-studio';document.body.classList.toggle('tool-open',open||resizeOpen||victorianOpen||nameOpen);nameView.classList.toggle('active',nameOpen);victorianView.classList.toggle('active',victorianOpen);view.classList.toggle('active',open);resizerView.classList.toggle('active',resizeOpen);window.scrollTo(0,0);}
+  const billiardsView=document.getElementById('billiards-view');
+  function update(){const nameOpen=location.hash==='#name-art-studio';const open=location.hash==='#whisperglow';const resizeOpen=location.hash==='#image-resizer';const victorianOpen=location.hash==='#victorian-studio';const billiardsOpen=location.hash==='#billiards';document.body.classList.toggle('tool-open',open||resizeOpen||victorianOpen||nameOpen||billiardsOpen);billiardsView.classList.toggle('active',billiardsOpen);nameView.classList.toggle('active',nameOpen);victorianView.classList.toggle('active',victorianOpen);view.classList.toggle('active',open);resizerView.classList.toggle('active',resizeOpen);window.scrollTo(0,0);}
   document.getElementById('name-art-studio-back').addEventListener('click',()=>{history.pushState(null,'',location.pathname+location.search);update()});
   document.getElementById('victorian-studio-back').addEventListener('click',()=>{history.pushState(null,'',location.pathname+location.search);update()});
   document.getElementById('image-resizer-back').addEventListener('click',()=>{history.pushState(null,'',location.pathname+location.search);update()});
+  document.getElementById('billiards-back').addEventListener('click',()=>{history.pushState(null,'',location.pathname+location.search);update()});
   document.getElementById('whisperglow-back').addEventListener('click',()=>{history.pushState(null,'',location.pathname+location.search);update()});
   window.addEventListener('hashchange',update);window.addEventListener('popstate',update);update();
 })();
 </script>
-<script id="hub-filter-script">(()=>{const grid=document.querySelector('main.wrap .grid');if(!grid)return;const cards=[...grid.querySelectorAll('.card')],search=document.getElementById('hub-search'),count=document.getElementById('hub-count'),empty=document.getElementById('hub-empty');const buttons={all:document.getElementById('hub-all'),games:document.getElementById('hub-games'),studios:document.getElementById('hub-studios')};let mode='all';const gamePattern=/game|roulette|pinball|kingdom|booth|adventure|machine|win it|wishes|box/i;const studioPattern=/studio|creator|generator|art|design|prompt|illustration|sticker|card/i;function update(){const q=search.value.trim().toLocaleLowerCase();let visible=0;cards.forEach(card=>{const title=card.querySelector('h2')?.textContent||'',match=mode==='all'||(mode==='games'?gamePattern:studioPattern).test(title);const show=match&&card.textContent.toLocaleLowerCase().includes(q);card.hidden=!show;if(show)visible++});count.textContent=visible+' of '+cards.length+' tools';empty.classList.toggle('visible',!visible)}Object.entries(buttons).forEach(([key,button])=>button.addEventListener('click',()=>{mode=key;Object.entries(buttons).forEach(([k,b])=>b.setAttribute('aria-pressed',String(k===key)));update()}));search.addEventListener('input',update);update()})();</script></body>
+<script id="hub-filter-script">(()=>{const grid=document.querySelector('main.wrap .grid');if(!grid)return;const cards=[...grid.querySelectorAll('.card')],search=document.getElementById('hub-search'),count=document.getElementById('hub-count'),empty=document.getElementById('hub-empty');const buttons={all:document.getElementById('hub-all'),games:document.getElementById('hub-games'),studios:document.getElementById('hub-studios')};let mode='all';const gamePattern=/game|billiards|roulette|pinball|kingdom|booth|adventure|machine|win it|wishes|box/i;const studioPattern=/studio|creator|generator|art|design|prompt|illustration|sticker|card/i;function update(){const q=search.value.trim().toLocaleLowerCase();let visible=0;cards.forEach(card=>{const title=card.querySelector('h2')?.textContent||'',match=mode==='all'||(mode==='games'?gamePattern:studioPattern).test(title);const show=match&&card.textContent.toLocaleLowerCase().includes(q);card.hidden=!show;if(show)visible++});count.textContent=visible+' of '+cards.length+' tools';empty.classList.toggle('visible',!visible)}Object.entries(buttons).forEach(([key,button])=>button.addEventListener('click',()=>{mode=key;Object.entries(buttons).forEach(([k,b])=>b.setAttribute('aria-pressed',String(k===key)));update()}));search.addEventListener('input',update);update()})();</script></body>
 </html>
