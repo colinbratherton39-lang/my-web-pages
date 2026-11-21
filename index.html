@@ -143,6 +143,15 @@ body.tool-open>main.wrap{display:none}
 #billiards-frame{display:block;width:100%;height:calc(100vh - 52px);min-height:780px;border:0;background:#05091a}
 @media(max-width:700px){#billiards-frame{min-height:760px}}
 </style>
+<style id="christmas-bowling-hub-style">
+#bowling-view{display:none;min-height:100vh;background:#071b16}
+#bowling-view.active{display:block}
+#bowling-back{display:block;width:100%;border:0;background:linear-gradient(90deg,#155b36,#a32334);color:white;text-align:left;padding:15px 24px;font:800 15px system-ui;cursor:pointer}
+#bowling-back:hover,#bowling-back:focus-visible{filter:brightness(1.15)}
+#bowling-frame{display:block;width:100%;height:calc(100dvh - 52px);min-height:650px;border:0;background:#071b16}
+@supports not (height:100dvh){#bowling-frame{height:calc(100vh - 52px)}}
+@media(max-width:700px){#bowling-frame{min-height:720px}}
+</style>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -170,6 +179,7 @@ body.tool-open>main.wrap{display:none}
 </div>
 <!-- New additions appear first. Older entries have no recorded addition dates; their original order is retained. -->
 <section class="grid">
+<a class="card" data-added="2026-11-21" href="#christmas-bowling" id="bowling-card"><div class="icon" aria-hidden="true">🎄🎳</div><div><h2>Christmas Wonderland Bowling</h2><p>Play ten frames against the computer. Choose Inside, Outside or Ice and unlock your three-word AI image prompt.</p><span>PLAY THE GAME →</span></div></a>
 <a class="card" data-added="2026-11-21" href="#billiards" id="billiards-card"><div class="icon" aria-hidden="true">🎱</div><div><h2>It’s a Bing Thing Billiards</h2><p>Pot three coloured balls to create a three-word AI image prompt. Optional aiming guide.</p><span>PLAY THE GAME →</span></div></a>
 
 <a class="card" data-added="2026-11-16" href="It%27s%20a%20Bing%20Thing%20HOOPS.html"><div class="icon" aria-hidden="true">🏀</div><div><h2>It's a Bing Thing HOOPS</h2><p>Choose your American sport, score five hoops and unlock a sports-themed AI image prompt.</p><span>PLAY THE GAME →</span></div></a>
@@ -488,6 +498,7 @@ function renderSaved(){function entries(items,target){$(target).innerHTML=items.
 " title="Whisperglow Storycraft Junk Journal Prompt Atelier"></iframe>
 </div>
 <div id="victorian-studio-view"><button id="victorian-studio-back" type="button">← Back to Creative Hub</button><iframe allow="clipboard-write" id="victorian-studio-frame" loading="lazy" src="Its_a_Bing_Thing_Victorian_Illustrations_Studio.html" title="Vintage Victorian Illustrations Studio"></iframe></div>
+<div id="bowling-view"><button id="bowling-back" type="button">← Back to Creative Hub</button><iframe id="bowling-frame" title="Christmas Wonderland Bowling" allow="clipboard-write" loading="lazy" src="Its_a_Bing_Thing_Ten_Pin_Bowling.html"></iframe></div>
 <div id="billiards-view"><button id="billiards-back" type="button">← Back to Creative Hub</button><iframe id="billiards-frame" title="It’s a Bing Thing Billiards" allow="clipboard-write" loading="lazy" src="Its_a_Bing_Thing_Billiards.html"></iframe></div>
 <script>
 (function(){
@@ -496,11 +507,13 @@ function renderSaved(){function entries(items,target){$(target).innerHTML=items.
   const resizerView=document.getElementById('image-resizer-view');
   const victorianView=document.getElementById('victorian-studio-view');
   const billiardsView=document.getElementById('billiards-view');
-  function update(){const nameOpen=location.hash==='#name-art-studio';const open=location.hash==='#whisperglow';const resizeOpen=location.hash==='#image-resizer';const victorianOpen=location.hash==='#victorian-studio';const billiardsOpen=location.hash==='#billiards';document.body.classList.toggle('tool-open',open||resizeOpen||victorianOpen||nameOpen||billiardsOpen);billiardsView.classList.toggle('active',billiardsOpen);nameView.classList.toggle('active',nameOpen);victorianView.classList.toggle('active',victorianOpen);view.classList.toggle('active',open);resizerView.classList.toggle('active',resizeOpen);window.scrollTo(0,0);}
+  const bowlingView=document.getElementById('bowling-view');
+  function update(){const nameOpen=location.hash==='#name-art-studio';const open=location.hash==='#whisperglow';const resizeOpen=location.hash==='#image-resizer';const victorianOpen=location.hash==='#victorian-studio';const billiardsOpen=location.hash==='#billiards';const bowlingOpen=location.hash==='#christmas-bowling';document.body.classList.toggle('tool-open',open||resizeOpen||victorianOpen||nameOpen||billiardsOpen||bowlingOpen);bowlingView.classList.toggle('active',bowlingOpen);billiardsView.classList.toggle('active',billiardsOpen);nameView.classList.toggle('active',nameOpen);victorianView.classList.toggle('active',victorianOpen);view.classList.toggle('active',open);resizerView.classList.toggle('active',resizeOpen);window.scrollTo(0,0);}
   document.getElementById('name-art-studio-back').addEventListener('click',()=>{history.pushState(null,'',location.pathname+location.search);update()});
   document.getElementById('victorian-studio-back').addEventListener('click',()=>{history.pushState(null,'',location.pathname+location.search);update()});
   document.getElementById('image-resizer-back').addEventListener('click',()=>{history.pushState(null,'',location.pathname+location.search);update()});
   document.getElementById('billiards-back').addEventListener('click',()=>{history.pushState(null,'',location.pathname+location.search);update()});
+  document.getElementById('bowling-back').addEventListener('click',()=>{history.pushState(null,'',location.pathname+location.search);update()});
   document.getElementById('whisperglow-back').addEventListener('click',()=>{history.pushState(null,'',location.pathname+location.search);update()});
   window.addEventListener('hashchange',update);window.addEventListener('popstate',update);update();
 })();
