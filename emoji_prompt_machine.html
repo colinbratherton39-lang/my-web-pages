@@ -256,21 +256,23 @@ function pickTheme(){
  }
  return pick(eligible);
 }
+// Use the entire selected category, independently of held symbols.
+const reelHistory = new Map();
+function modeThemes(mode){return THEMES.filter(t=>(mode==='matching'||mode==='surprise'||t.mode===mode||(THEME_MODES[mode]&&THEME_MODES[mode].test(t.n)))&&(mode!=='winter'||(t.mode!=='christmas'&&!/christmas/i.test(t.n))));}
 function reelPool(theme,i){
- // Surprise varies the theme on every spin, but never mixes unrelated theme pools.
- return document.getElementById('emojiMode').value==='winter'?winterPools[i]:theme.a[i];
+ const mode=document.getElementById('emojiMode').value;
+ const pool=[...new Set(modeThemes(mode).flatMap(t=>t.a[i]).concat(mode==='winter'?winterPools[i]:[]))];
+ const expanded=pool;
+ return mode==='winter'?expanded.filter(e=>!winterFestive.test(e)):expanded;
 }
 function nextSymbol(pool,old,used,theme,i){
- let candidates=pool.filter(x=>x!==old&&!used.has(x));
- if(!candidates.length){
-   // Expand only within the same theme, not to random objects from every theme.
-   candidates=pool.filter(x=>!used.has(x));
- }
- if(!candidates.length){
-   // There are many symbols globally; this is an emergency fallback only.
-   candidates=pool.filter(x=>!used.has(x));
- }
- return candidates.length?pick(candidates):old;
+ const key=document.getElementById('emojiMode').value+'|'+i;
+ const available=pool.filter(x=>!used.has(x)&&x!==old);
+ let history=reelHistory.get(key)||new Set();
+ let candidates=available.filter(x=>!history.has(x));
+ if(!candidates.length){history=new Set();candidates=available;}
+ const result=pick(candidates.length?candidates:pool.filter(x=>!used.has(x)));
+ history.add(result);reelHistory.set(key,history);return result;
 }
 
 // Each mode has coherent ROLE pools: character, location, atmosphere, supporting prop.
@@ -332,17 +334,17 @@ function promptText(){
 }
 const winterPools = [['🐺','🦊','🐻‍❄️','🦉','🐧','🦭','⛄','⛷️','🏂'],['🏔️','🗻','🌲','🧊','🏡'],['🌨️','❄️'],['🧣','🧤','⛸️','🛷','☃️','🧊','🌲']];
 const winterFestive = /🎄|🎅|🤶|🎁|🔔|🎀|🧝|🧦/u;
-function chooseThemeForMode(){const mode=document.getElementById('emojiMode').value;let choices=THEMES.map((t,i)=>i).filter(i=>mode==='matching'||mode==='surprise'||THEMES[i].mode===mode||(THEME_MODES[mode]&&THEME_MODES[mode].test(THEMES[i].n)));if(mode==='winter')choices=choices.filter(i=>THEMES[i].mode!=='christmas'&&!/christmas/i.test(THEMES[i].n));const locks=[0,1,2,3].filter(i=>held[i]);if(locks.length){let matching=choices.filter(i=>locks.every(j=>THEMES[i].a[j].includes(current[j])));if(matching.length)choices=matching;else {const ranked=choices.map(i=>({i,score:locks.filter(j=>THEMES[i].a[j].includes(current[j])).length}));const max=Math.max(...ranked.map(x=>x.score));choices=ranked.filter(x=>x.score===max).map(x=>x.i)}}const fresh=choices.filter(i=>!lastThemes.includes(i));return pick(fresh.length?fresh:choices)}
+function chooseThemeForMode(){const choices=modeThemes(document.getElementById('emojiMode').value);return THEMES.indexOf(pick(choices));}
 async function spin(){
  if(busy)return;
- if(document.getElementById('emojiMode').value==='winter')for(let i=0;i<4;i++)if(held[i]&&winterFestive.test(current[i]))setHeld(i,false);
+
  if(held.every(Boolean)){arcadeSound.play("error");statusEl.textContent='🔒 Everything is held! Unlock a reel to spin.';return;}
  busy=true;document.getElementById('emojiMode').disabled=true;arcadeSound.play("start");arcadeSound.rolling();document.querySelectorAll('[data-hold]').forEach(b=>b.disabled=true);
  create.disabled=true;create.textContent='🎰 SPINNING…';statusEl.textContent='🎰 Spinning unlocked reels…';
  try{
    const old=[...current],oldStyle=style;
    let idx=chooseThemeForMode(),theme=THEMES[idx];
-   if(document.getElementById('emojiMode').value==='winter')for(let i=0;i<4;i++)if(held[i]&&(!reelPool(theme,i).includes(current[i])))setHeld(i,false);
+  
    lastThemes.push(idx);if(lastThemes.length>12)lastThemes.shift();themeIndex=idx;
    let next=[...current],used=new Set(current.filter((_,i)=>held[i]));
    for(let i=0;i<4;i++){
@@ -353,7 +355,7 @@ async function spin(){
    let newStyle=held[4]?style:fromBag('style');
    if(!held[4]){let attempts=0;while((newStyle===style||recentStyles.includes(newStyle))&&attempts++<60)newStyle=fromBag('style');}
    let animations=[];
-   for(let i=0;i<4;i++)if(!held[i])animations.push(animateReel(tracks[i],windows[i],(document.getElementById('emojiMode').value==='winter'&&!winterPools[i].includes(old[i])?next[i]:old[i]),next[i],reelPool(theme,i),850+i*180));
+   for(let i=0;i<4;i++)if(!held[i])animations.push(animateReel(tracks[i],windows[i],old[i],next[i],reelPool(theme,i),850+i*180));
    if(!held[4])animations.push(animateReel(styleTrack,styleWindow,oldStyle,newStyle,STYLES,1450,true));
    await Promise.all(animations);arcadeSound.stop();arcadeSound.play("win");
    current=next;style=newStyle;sceneIdea=freshIdea();spinNumber++;
@@ -365,7 +367,7 @@ async function spin(){
  finally{arcadeSound.stop();create.disabled=false;create.textContent='🎰 SPIN AGAIN';busy=false;document.getElementById('emojiMode').disabled=false;document.querySelectorAll('[data-hold]').forEach(b=>b.disabled=false);}
 }
 async function copy(text,msg){try{await navigator.clipboard.writeText(text)}catch(e){let ta=document.createElement('textarea');ta.value=text;document.body.append(ta);ta.select();document.execCommand('copy');ta.remove()}arcadeSound.play("copy");toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1400)}
-document.getElementById('emojiMode').addEventListener('change',()=>{if(busy)return;const v=document.getElementById('emojiMode').value;arcadeSound.play('mode');allEmojiMode=v==='surprise';if(v==='winter'){for(let i=0;i<4;i++){setHeld(i,false);current[i]=pick(winterPools[i]);display(tracks[i],current[i]);}sceneIdea=freshIdea();renderPrompt();}statusEl.textContent='🎭 Selected: '+document.getElementById('emojiMode').selectedOptions[0].textContent+'. Spin to create a fresh scene.';});
+document.getElementById('emojiMode').addEventListener('change',()=>{if(busy)return;arcadeSound.play('mode');statusEl.textContent='🎭 Selected: '+document.getElementById('emojiMode').selectedOptions[0].textContent+'. Held reels stay fixed; spin for new emojis.';});
 create.addEventListener('click',spin);document.getElementById('copyPrompt').onclick=()=>spinNumber?copy(promptText(),'Prompt copied ✨'):spin();document.getElementById('copyCombo').onclick=()=>spinNumber?copy(`${current.join(' ')} — ${style}`,'Emojis + style copied'):spin();document.addEventListener('keydown',e=>{if(e.code==='Space'&&!['INPUT','TEXTAREA','BUTTON'].includes(document.activeElement.tagName)){e.preventDefault();spin()}});
 
 const soundToggle=document.getElementById('soundToggle');
